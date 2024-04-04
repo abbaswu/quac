@@ -1,0 +1,19 @@
+{
+    "$schema": "https://raw.githubusercontent.com/microsoft/pyright/main/packages/vscode-pyright/schemas/pyrightconfig.schema.json",
+    "typeshedPath": ".",
+    "include": [
+        "test_cases",
+    ],
+    "typeCheckingMode": "strict",
+    // Using unspecific "type ignore" comments in test_cases.
+    // See https://github.com/python/typeshed/pull/8083
+    "enableTypeIgnoreComments": true,
+    "reportPropertyTypeMismatch": "error",
+    "reportUnnecessaryTypeIgnoreComment": "error",
+    "reportMissingModuleSource": "none",
+    "reportPrivateUsage": "none",
+    // isinstance checks are still needed when validating inputs outside of typeshed's control
+    "reportUnnecessaryIsInstance": "none",
+    // The name of the self/cls parameter is out of typeshed's control.
+    "reportSelfClsParameterName": "none",
+}

@@ -1,0 +1,36 @@
+
+str/Path
+nan/Optional[str]
+str/List[str]
+str/List[str]
+str/Color
+Color/str
+bool/Color
+str/Dict[str, str]
+Dict[str, int]/nan
+List[Token]/Token
+nan/Dict[str, int]
+List[Token]/Token
+nan/float
+int/List[int]
+int/Location
+Dict[str, torch.Tensor]/Dict[str, Any]
+Dict[str, torch.Tensor]/List[Dict[str, Any]]
+Optional[torch.Tensor]/int
+Optional[torch.Tensor]/int
+bool/str
+Optional[torch.Tensor]/int
+Optional[torch.Tensor]/_Optional[str]
+Dict[str, float]/nan
+bool/(bool | None)
+
+torch.Tensor/T
+torch.Tensor/torch.LongTensor/Optional[torch.Tensor]
+nan/np.ndarray
+int/float
+float/Optional[float]
+nan/Dict[str, float]
+bool/(bool | None)
+
+List[Instance]/nan
+JsonDict/List[JsonDict]/Dict

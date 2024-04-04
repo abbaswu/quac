@@ -1,0 +1,93 @@
+
+
+bool/typing.Optional[bool]/int
+bool/int/typing.Optional[bool]
+bool/int/typing.Optional[bool]
+bool/int/typing.Optional[bool]
+bool/int/azure.core.pipeline.transport.HttpResponse
+
+
+typing.str/typing.Any/typing.Dict[typing.str, typing.Any]
+typing.Any/typing.str/typing.List[typing.str]
+typing.Any/models.ConnectionSharedKey/models.PrivateEndpointConnection
+
+
+
+typing.Any/typing.List[typing.str]/int
+bool/typing.Optional[bool]/int
+typing.Any/typing.str/typing.List[typing.str]
+typing.str/typing.Any/typing.List[typing.str]
+typing.str/typing.Any/typing.Dict[typing.str, typing.Any]
+typing.Any/typing.str/typing.List[typing.str]
+typing.str/typing.Any/typing.List[typing.str]
+typing.str/typing.Any/typing.Dict[typing.str, typing.Any]
+
+typing.str/int/typing.Any
+typing.Any/typing.str/typing.List[typing.str]
+bool/typing.Any/int
+typing.Any/typing.List[typing.str]/azure.core.polling.AsyncLROPoller[None]
+typing.str/typing.Any/bool
+typing.Any/typing.str/typing.List[typing.str]
+typing.Any/typing.str/typing.List[typing.str]
+typing.Any/typing.List[typing.str]/bool
+typing.Any/typing.str/typing.List[typing.str]
+int/typing.str/float
+typing.Any/typing.str/typing.Dict[typing.str, typing.Any]
+typing.Any/typing.str/typing.List[typing.str]
+typing.Any/typing.str/typing.Dict[typing.str, typing.Any]
+typing.Any/typing.List[typing.str]/bool
+int/typing.str/float
+typing.str/typing.Any/int
+typing.str/typing.Any/int
+typing.Any/typing.Dict[typing.str, typing.Any]/typing.str
+int/typing.str/float
+typing.str/typing.Any/int
+typing.Any/typing.str/int
+typing.Any/azure.core.polling.AsyncLROPoller[None]/typing.Dict[typing.str, typing.Any]
+int/typing.str/float
+typing.str/typing.Any/int
+typing.str/typing.Any/typing.List[typing.str]
+typing.Any/typing.Dict[typing.str, typing.Any]/typing.str
+int/typing.str/typing.Any
+typing.Any/typing.str/int
+typing.str/typing.Any/typing.List[typing.str]
+typing.Any/typing.str/typing.Dict[typing.str, typing.Any]
+typing.Any/typing.Dict[typing.str, typing.Any]/typing.str
+int/typing.str/float
+typing.str/typing.Any/int
+typing.Any/typing.str/typing.List[typing.str]
+typing.Any/typing.Dict[typing.str, typing.Any]/typing.str
+int/typing.str/float
+typing.str/int/typing.Any
+typing.Any/typing.str/typing.List[typing.str]
+typing.Any/typing.Dict[typing.str, typing.Any]/typing.str
+int/typing.str/float
+typing.str/typing.Any/int
+typing.Any/typing.str/bool
+typing.Any/typing.Dict[typing.str, typing.Any]/typing.str
+int/typing.str/float
+typing.str/int/typing.Any
+typing.str/int/typing.Any
+bool/typing.str/typing.Any
+typing.Any/typing.str/typing.Dict[typing.str, typing.Any]
+typing.str/int/typing.Any
+typing.str/int/typing.Any
+typing.Any/typing.str/int
+typing.Any/typing.Dict[typing.str, typing.Any]/typing.str
+typing.Any/typing.str/typing.List[typing.str]
+typing.Any/typing.str/typing.List[typing.str]
+typing.str/int/typing.Any
+typing.Any/typing.Dict[typing.str, typing.Any]/typing.str
+typing.Any/typing.str/int
+typing.str/typing.Any/int
+typing.str/typing.Any/bool
+typing.Any/typing.Dict[typing.str, typing.Any]/typing.str
+int/typing.str/float
+typing.str/typing.Any/typing.List[typing.str]
+typing.Any/typing.str/int
+typing.str/int/typing.Any
+typing.str/typing.Any/int
+typing.str/typing.Any/typing.List[typing.str]
+typing.Any/typing.str/typing.Dict[typing.str, typing.Any]
+int/typing.str/float
+typing.str/typing.Any/int

@@ -1,0 +1,28 @@
+('pendulum', 541, ['DateTime'], ['Date']), poly
+('pendulum', 428, ['FormattableMixin'], ['DateTime']), TS, +
+('pendulum', 687, ['str'], ['int']), poly, -
+('pendulum', 385, ['str'], ['int']), poly, +
+('pendulum', 187, ['DifferenceFormatter]'], ['bool']), TS
+('pendulum', 221, ['Timezone]'], ['str']), third-party unannotated
+('pendulum', 51, ['str'], ['int', 'object']), poly
+('pendulum', 685, ['str'], ['int']), poly
+('relex', 9, ['any'], ['dict[str,tensor]']), bug/wrong third-party annotation 
+('relex', 41, ['list[str]'], ['set[str]']), wrong annotation
+('pendulum', 37, ['str'], ['int']), poly
+('pendulum', 541, ['DateTime'], ['Date']), poly
+('seagull', 43, ['any'], ['ndarray']), bug
+('pendulum', 415, ['DateTime'], ['datetime']), poly 
+('pendulum', 479, ['str'], ['int']), TS
+('pendulum', 774, ['Date'], ['DateTime']), poly
+('pendulum', 43, ['str'], ['bool']), poly
+('pendulum', 44, ['str'], ['int']), poly
+('pendulum', 650, ['DateTime'], ['datetime']), poly
+('tinychain', 72, ['any'], ['bytes'])
+('tinychain', 74, ['any'], ['list[txout]'])
+('tinychain', 21, ['UnspentTxOut'], ['txout']), poly
+('relex', 12, ['ndarray'], ['tensor']), wrong annotation
+('relex', 22, ['str'], ['ndarray']), third-party unannotation
+('tinychain', 39, ['any'], ['block']), strong/SSA + 
+('tinychain', 73, ['any'], ['object'])
+('relex', 33, ['ndarray'], ['list[tuple[int,str]]']), weak seed
+('relex', 48, ['ndarray'], ['jsondict', 'dict']), poly

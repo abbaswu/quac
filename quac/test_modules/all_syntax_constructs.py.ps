@@ -1,0 +1,1712 @@
+%!PS-Adobe-3.0
+%%BoundingBox: 18 36 594 756
+%%Title: Enscript Output
+%%Creator: GNU Enscript 1.6.5.90
+%%CreationDate: Sat Feb 17 21:56:27 2024
+%%Orientation: Landscape
+%%Pages: (atend)
+%%DocumentMedia: Letter 612 792 0 () ()
+%%DocumentNeededResources: (atend)
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset Enscript-Prolog 1.6.5 90
+%
+% Procedures.
+%
+
+/_S {	% save current state
+  /_s save def
+} def
+/_R {	% restore from saved state
+  _s restore
+} def
+
+/S {	% showpage protecting gstate
+  gsave
+  showpage
+  grestore
+} bind def
+
+/MF {	% fontname newfontname -> -	make a new encoded font
+  /newfontname exch def
+  /fontname exch def
+
+  /fontdict fontname findfont def
+  /newfont fontdict maxlength dict def
+
+  fontdict {
+    exch
+    dup /FID eq {
+      % skip FID pair
+      pop pop
+    } {
+      % copy to the new font dictionary
+      exch newfont 3 1 roll put
+    } ifelse
+  } forall
+
+  newfont /FontName newfontname put
+
+  % insert only valid encoding vectors
+  encoding_vector length 256 eq {
+    newfont /Encoding encoding_vector put
+  } if
+
+  newfontname newfont definefont pop
+} def
+
+/MF_PS { % fontname newfontname -> -	make a new font preserving its enc
+  /newfontname exch def
+  /fontname exch def
+
+  /fontdict fontname findfont def
+  /newfont fontdict maxlength dict def
+
+  fontdict {
+    exch
+    dup /FID eq {
+      % skip FID pair
+      pop pop
+    } {
+      % copy to the new font dictionary
+      exch newfont 3 1 roll put
+    } ifelse
+  } forall
+
+  newfont /FontName newfontname put
+
+  newfontname newfont definefont pop
+} def
+
+/SF { % fontname width height -> -	set a new font
+  /height exch def
+  /width exch def
+
+  findfont
+  [width 0 0 height 0 0] makefont setfont
+} def
+
+/SUF { % fontname width height -> -	set a new user font
+  /height exch def
+  /width exch def
+
+  /F-gs-user-font MF
+  /F-gs-user-font width height SF
+} def
+
+/SUF_PS { % fontname width height -> -	set a new user font preserving its enc
+  /height exch def
+  /width exch def
+
+  /F-gs-user-font MF_PS
+  /F-gs-user-font width height SF
+} def
+
+/M {moveto} bind def
+/s {show} bind def
+
+/Box {	% x y w h -> -			define box path
+  /d_h exch def /d_w exch def /d_y exch def /d_x exch def
+  d_x d_y  moveto
+  d_w 0 rlineto
+  0 d_h rlineto
+  d_w neg 0 rlineto
+  closepath
+} def
+
+/bgs {	% x y height blskip gray str -> -	show string with bg color
+  /str exch def
+  /gray exch def
+  /blskip exch def
+  /height exch def
+  /y exch def
+  /x exch def
+
+  gsave
+    x y blskip sub str stringwidth pop height Box
+    gray setgray
+    fill
+  grestore
+  x y M str s
+} def
+
+/bgcs { % x y height blskip red green blue str -> -  show string with bg color
+  /str exch def
+  /blue exch def
+  /green exch def
+  /red exch def
+  /blskip exch def
+  /height exch def
+  /y exch def
+  /x exch def
+
+  gsave
+    x y blskip sub str stringwidth pop height Box
+    red green blue setrgbcolor
+    fill
+  grestore
+  x y M str s
+} def
+
+% Highlight bars.
+/highlight_bars {	% nlines lineheight output_y_margin gray -> -
+  gsave
+    setgray
+    /ymarg exch def
+    /lineheight exch def
+    /nlines exch def
+
+    % This 2 is just a magic number to sync highlight lines to text.
+    0 d_header_y ymarg sub 2 sub translate
+
+    /cw d_output_w cols div def
+    /nrows d_output_h ymarg 2 mul sub lineheight div cvi def
+
+    % for each column
+    0 1 cols 1 sub {
+      cw mul /xp exch def
+
+      % for each rows
+      0 1 nrows 1 sub {
+        /rn exch def
+        rn lineheight mul neg /yp exch def
+        rn nlines idiv 2 mod 0 eq {
+	  % Draw highlight bar.  4 is just a magic indentation.
+	  xp 4 add yp cw 8 sub lineheight neg Box fill
+	} if
+      } for
+    } for
+
+  grestore
+} def
+
+% Line highlight bar.
+/line_highlight {	% x y width height gray -> -
+  gsave
+    /gray exch def
+    Box gray setgray fill
+  grestore
+} def
+
+% Column separator lines.
+/column_lines {
+  gsave
+    .1 setlinewidth
+    0 d_footer_h translate
+    /cw d_output_w cols div def
+    1 1 cols 1 sub {
+      cw mul 0 moveto
+      0 d_output_h rlineto stroke
+    } for
+  grestore
+} def
+
+% Column borders.
+/column_borders {
+  gsave
+    .1 setlinewidth
+    0 d_footer_h moveto
+    0 d_output_h rlineto
+    d_output_w 0 rlineto
+    0 d_output_h neg rlineto
+    closepath stroke
+  grestore
+} def
+
+% Do the actual underlay drawing
+/draw_underlay {
+  ul_style 0 eq {
+    ul_str true charpath stroke
+  } {
+    ul_str show
+  } ifelse
+} def
+
+% Underlay
+/underlay {	% - -> -
+  gsave
+    0 d_page_h translate
+    d_page_h neg d_page_w atan rotate
+
+    ul_gray setgray
+    ul_font setfont
+    /dw d_page_h dup mul d_page_w dup mul add sqrt def
+    ul_str stringwidth pop dw exch sub 2 div ul_h_ptsize -2 div moveto
+    draw_underlay
+  grestore
+} def
+
+/user_underlay {	% - -> -
+  gsave
+    ul_x ul_y translate
+    ul_angle rotate
+    ul_gray setgray
+    ul_font setfont
+    0 0 ul_h_ptsize 2 div sub moveto
+    draw_underlay
+  grestore
+} def
+
+% Page prefeed
+/page_prefeed {		% bool -> -
+  statusdict /prefeed known {
+    statusdict exch /prefeed exch put
+  } {
+    pop
+  } ifelse
+} def
+
+% Wrapped line markers
+/wrapped_line_mark {	% x y charwith charheight type -> -
+  /type exch def
+  /h exch def
+  /w exch def
+  /y exch def
+  /x exch def
+
+  type 2 eq {
+    % Black boxes (like TeX does)
+    gsave
+      0 setlinewidth
+      x w 4 div add y M
+      0 h rlineto w 2 div 0 rlineto 0 h neg rlineto
+      closepath fill
+    grestore
+  } {
+    type 3 eq {
+      % Small arrows
+      gsave
+        .2 setlinewidth
+        x w 2 div add y h 2 div add M
+        w 4 div 0 rlineto
+        x w 4 div add y lineto stroke
+
+        x w 4 div add w 8 div add y h 4 div add M
+        x w 4 div add y lineto
+	w 4 div h 8 div rlineto stroke
+      grestore
+    } {
+      % do nothing
+    } ifelse
+  } ifelse
+} def
+
+% EPSF import.
+
+/BeginEPSF {
+  /b4_Inc_state save def    		% Save state for cleanup
+  /dict_count countdictstack def	% Count objects on dict stack
+  /op_count count 1 sub def		% Count objects on operand stack
+  userdict begin
+  /showpage { } def
+  0 setgray 0 setlinecap
+  1 setlinewidth 0 setlinejoin
+  10 setmiterlimit [ ] 0 setdash newpath
+  /languagelevel where {
+    pop languagelevel
+    1 ne {
+      false setstrokeadjust false setoverprint
+    } if
+  } if
+} bind def
+
+/EndEPSF {
+  count op_count sub { pos } repeat	% Clean up stacks
+  countdictstack dict_count sub { end } repeat
+  b4_Inc_state restore
+} bind def
+
+% Check PostScript language level.
+/languagelevel where {
+  pop /gs_languagelevel languagelevel def
+} {
+  /gs_languagelevel 1 def
+} ifelse
+%%EndResource
+%%BeginResource: procset Enscript-Encoding-88591 1.6.5 90
+/encoding_vector [
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/space        	/exclam       	/quotedbl     	/numbersign   	
+/dollar       	/percent      	/ampersand    	/quoteright   	
+/parenleft    	/parenright   	/asterisk     	/plus         	
+/comma        	/hyphen       	/period       	/slash        	
+/zero         	/one          	/two          	/three        	
+/four         	/five         	/six          	/seven        	
+/eight        	/nine         	/colon        	/semicolon    	
+/less         	/equal        	/greater      	/question     	
+/at           	/A            	/B            	/C            	
+/D            	/E            	/F            	/G            	
+/H            	/I            	/J            	/K            	
+/L            	/M            	/N            	/O            	
+/P            	/Q            	/R            	/S            	
+/T            	/U            	/V            	/W            	
+/X            	/Y            	/Z            	/bracketleft  	
+/backslash    	/bracketright 	/asciicircum  	/underscore   	
+/quoteleft    	/a            	/b            	/c            	
+/d            	/e            	/f            	/g            	
+/h            	/i            	/j            	/k            	
+/l            	/m            	/n            	/o            	
+/p            	/q            	/r            	/s            	
+/t            	/u            	/v            	/w            	
+/x            	/y            	/z            	/braceleft    	
+/bar          	/braceright   	/tilde        	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/space        	/exclamdown   	/cent         	/sterling     	
+/currency     	/yen          	/brokenbar    	/section      	
+/dieresis     	/copyright    	/ordfeminine  	/guillemotleft	
+/logicalnot   	/hyphen       	/registered   	/macron       	
+/degree       	/plusminus    	/twosuperior  	/threesuperior	
+/acute        	/mu           	/paragraph    	/bullet       	
+/cedilla      	/onesuperior  	/ordmasculine 	/guillemotright	
+/onequarter   	/onehalf      	/threequarters	/questiondown 	
+/Agrave       	/Aacute       	/Acircumflex  	/Atilde       	
+/Adieresis    	/Aring        	/AE           	/Ccedilla     	
+/Egrave       	/Eacute       	/Ecircumflex  	/Edieresis    	
+/Igrave       	/Iacute       	/Icircumflex  	/Idieresis    	
+/Eth          	/Ntilde       	/Ograve       	/Oacute       	
+/Ocircumflex  	/Otilde       	/Odieresis    	/multiply     	
+/Oslash       	/Ugrave       	/Uacute       	/Ucircumflex  	
+/Udieresis    	/Yacute       	/Thorn        	/germandbls   	
+/agrave       	/aacute       	/acircumflex  	/atilde       	
+/adieresis    	/aring        	/ae           	/ccedilla     	
+/egrave       	/eacute       	/ecircumflex  	/edieresis    	
+/igrave       	/iacute       	/icircumflex  	/idieresis    	
+/eth          	/ntilde       	/ograve       	/oacute       	
+/ocircumflex  	/otilde       	/odieresis    	/divide       	
+/oslash       	/ugrave       	/uacute       	/ucircumflex  	
+/udieresis    	/yacute       	/thorn        	/ydieresis    	
+] def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Courier-Bold
+%%IncludeResource: font Courier
+/HFpt_w 10 def
+/HFpt_h 10 def
+/Courier-Bold /HF-gs-font MF
+/HF /HF-gs-font findfont [HFpt_w 0 0 HFpt_h 0 0] makefont def
+/Courier /F-gs-font MF
+/F-gs-font 10 10 SF
+/#copies 1 def
+% Pagedevice definitions:
+gs_languagelevel 1 gt {
+  <<
+    /PageSize [612 792] 
+  >> setpagedevice
+} if
+%%BeginResource: procset Enscript-Header-enscript 1.6.5 90
+%%IncludeResource: font Times-Bold
+%%IncludeResource: font Times-Roman
+
+% Fonts.
+/Times-Bold /HeaderFont-Bold MF
+/HeaderDateF /HeaderFont-Bold findfont 12 scalefont def
+
+/Times-Roman /HeaderFont-Times MF
+/HeaderHDRF /HeaderFont-Times findfont 14 scalefont def
+
+/HeaderPageNumF /Helvetica-Bold findfont 28.8 scalefont def
+
+/do_header {	% print enscript header
+  gsave
+    d_header_x d_header_y translate
+
+    % light bar
+    0 0 d_header_w d_header_h 2 div Box
+    .95 setgray fill
+
+    % dark gray boxes
+    /dbw d_header_h 2 mul def	% dark box width
+    /dbc .7 def			% dark box color
+
+    % left dark box.
+    0 0 dbw d_header_h Box
+    dbc setgray fill
+
+    0 setgray 
+    HeaderDateF setfont
+    moddatestr dup stringwidth pop dbw exch sub 2 div 
+    d_header_h 2 div 2 add moveto show
+    modtimestr dup stringwidth pop dbw exch sub 2 div 
+    d_header_h 5 div moveto show
+
+    % right dark box
+    d_header_w dbw sub 0 dbw d_header_h Box
+    dbc setgray fill
+
+    HeaderPageNumF setfont
+    1 setgray
+    pagenumstr dup
+    stringwidth pop dbw exch sub 2 div d_header_w dbw sub add
+    d_header_h .2 mul moveto show
+
+    % filename
+    0 setgray 
+    HeaderHDRF setfont
+    d_header_w fname stringwidth pop sub 2 div d_header_h 8 div moveto
+    fname show
+
+    % user supplied header string.
+    user_header_p {
+      /h d_header_h 8 div 5 mul def
+
+      % Implement strict enscript compatibility.
+      user_header_center_str () eq user_header_right_str () eq and {
+        d_header_w user_header_left_str stringwidth pop sub 2 div 
+        h moveto user_header_left_str show
+      } {
+        dbw 5 add h moveto user_header_left_str show
+
+        d_header_w user_header_center_str stringwidth pop sub 2 div 
+        h moveto user_header_center_str show
+
+	d_header_w dbw sub 5 sub user_header_right_str stringwidth pop
+	sub h moveto user_header_right_str show
+      } ifelse
+    } if
+
+  grestore
+} def
+%%EndResource
+/d_page_w 720 def
+/d_page_h 576 def
+/d_header_x 0 def
+/d_header_y 540 def
+/d_header_w 720 def
+/d_header_h 36 def
+/d_footer_x 0 def
+/d_footer_y 0 def
+/d_footer_w 720 def
+/d_footer_h 0 def
+/d_output_w 720 def
+/d_output_h 540 def
+/cols 1 def
+%%EndSetup
+%%Page: (1) 1
+%%BeginPageSetup
+_S
+90 rotate
+36 -594 translate
+/pagenum 1 def
+/fname (all_syntax_constructs.py) def
+/fdir (.) def
+/ftail (all_syntax_constructs.py) def
+% User defined strings:
+/pagenumstr (1) def
+/moddatestr (02/16/24) def
+/modtimestr (22:09:32) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+30 527 M (1:) s
+/Courier-Bold 10 10 SUF
+48 527 M
+(import) s
+/F-gs-font 10 10 SF
+84 527 M
+( asyncio) s
+30 516 M (2:) s
+30 505 M (3:) s
+30 494 M (4:) s
+/Courier-Bold 10 10 SUF
+48 494 M
+(class) s
+/F-gs-font 10 10 SF
+78 494 M
+( AsyncOpen:) s
+30 483 M (5:) s
+48 483 M
+(    ) s
+/Courier-Bold 10 10 SUF
+72 483 M
+(def) s
+/F-gs-font 10 10 SF
+90 483 M
+( ) s
+/Courier-Bold 10 10 SUF
+96 483 M
+(__init__) s
+/F-gs-font 10 10 SF
+144 483 M
+(\(self, f, m\):) s
+30 472 M (6:) s
+48 472 M
+(        self.fp = open\(f, m\)) s
+30 461 M (7:) s
+48 461 M
+(    ) s
+30 450 M (8:) s
+48 450 M
+(    async ) s
+/Courier-Bold 10 10 SUF
+108 450 M
+(def) s
+/F-gs-font 10 10 SF
+126 450 M
+( ) s
+/Courier-Bold 10 10 SUF
+132 450 M
+(__aenter__) s
+/F-gs-font 10 10 SF
+192 450 M
+(\(self\):) s
+30 439 M (9:) s
+48 439 M
+(        ) s
+/Courier-Bold 10 10 SUF
+96 439 M
+(return) s
+/F-gs-font 10 10 SF
+132 439 M
+( self) s
+24 428 M (10:) s
+48 428 M
+(    ) s
+24 417 M (11:) s
+48 417 M
+(    async ) s
+/Courier-Bold 10 10 SUF
+108 417 M
+(def) s
+/F-gs-font 10 10 SF
+126 417 M
+( ) s
+/Courier-Bold 10 10 SUF
+132 417 M
+(read) s
+/F-gs-font 10 10 SF
+156 417 M
+(\(self\):) s
+24 406 M (12:) s
+48 406 M
+(        ) s
+/Courier-Bold 10 10 SUF
+96 406 M
+(return) s
+/F-gs-font 10 10 SF
+132 406 M
+( self.fp.read\(\)) s
+24 395 M (13:) s
+48 395 M
+(    ) s
+24 384 M (14:) s
+48 384 M
+(    async ) s
+/Courier-Bold 10 10 SUF
+108 384 M
+(def) s
+/F-gs-font 10 10 SF
+126 384 M
+( ) s
+/Courier-Bold 10 10 SUF
+132 384 M
+(__aexit__) s
+/F-gs-font 10 10 SF
+186 384 M
+(\(self, *args, **kwargs\):) s
+24 373 M (15:) s
+48 373 M
+(        self.fp.close\(\)) s
+24 362 M (16:) s
+24 351 M (17:) s
+/Courier-Bold 10 10 SUF
+48 351 M
+(class) s
+/F-gs-font 10 10 SF
+78 351 M
+( ExampleClass:) s
+24 340 M (18:) s
+48 340 M
+(    ) s
+/Courier-Bold 10 10 SUF
+72 340 M
+(def) s
+/F-gs-font 10 10 SF
+90 340 M
+( ) s
+/Courier-Bold 10 10 SUF
+96 340 M
+(__init__) s
+/F-gs-font 10 10 SF
+144 340 M
+(\(self, name\):) s
+24 329 M (19:) s
+48 329 M
+(        self.name = name) s
+24 318 M (20:) s
+24 307 M (21:) s
+48 307 M
+(    async ) s
+/Courier-Bold 10 10 SUF
+108 307 M
+(def) s
+/F-gs-font 10 10 SF
+126 307 M
+( ) s
+/Courier-Bold 10 10 SUF
+132 307 M
+(async_method) s
+/F-gs-font 10 10 SF
+204 307 M
+(\(self\):) s
+24 296 M (22:) s
+48 296 M
+(        async with AsyncOpen\() s
+/Courier-Bold 10 10 SUF
+222 296 M
+('file.txt') s
+/F-gs-font 10 10 SF
+282 296 M
+(, ) s
+/Courier-Bold 10 10 SUF
+294 296 M
+('r') s
+/F-gs-font 10 10 SF
+312 296 M
+(\) as f:) s
+24 285 M (23:) s
+48 285 M
+(            ) s
+/Courier-Bold 10 10 SUF
+120 285 M
+(return) s
+/F-gs-font 10 10 SF
+156 285 M
+( await f.read\(\)) s
+24 274 M (24:) s
+24 263 M (25:) s
+/Courier-Oblique 10 10 SUF
+48 263 M
+(# Constants, Lists, Tuples, Sets, Dicts) s
+/F-gs-font 10 10 SF
+24 252 M (26:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 252 M
+(x = [1, 2, 3]  ) s
+/Courier-Oblique 10 10 SUF
+138 252 M
+(# ast.List) s
+/F-gs-font 10 10 SF
+24 241 M (27:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 241 M
+(y = \(1, 2, 3\)  ) s
+/Courier-Oblique 10 10 SUF
+138 241 M
+(# ast.Tuple) s
+/F-gs-font 10 10 SF
+24 230 M (28:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 230 M
+(z = {1, 2, 3}  ) s
+/Courier-Oblique 10 10 SUF
+138 230 M
+(# ast.Set) s
+/F-gs-font 10 10 SF
+24 219 M (29:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 219 M
+(w = {) s
+/Courier-Bold 10 10 SUF
+78 219 M
+('a') s
+/F-gs-font 10 10 SF
+96 219 M
+(: 1, ) s
+/Courier-Bold 10 10 SUF
+126 219 M
+('b') s
+/F-gs-font 10 10 SF
+144 219 M
+(: 2}  ) s
+/Courier-Oblique 10 10 SUF
+180 219 M
+(# ast.Dict) s
+/F-gs-font 10 10 SF
+24 208 M (30:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+24 197 M (31:) s
+/Courier-Oblique 10 10 SUF
+48 197 M
+(# Starred, UnaryOp, BinOp, Compare) s
+/F-gs-font 10 10 SF
+24 186 M (32:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 186 M
+(*rest, = x  ) s
+/Courier-Oblique 10 10 SUF
+120 186 M
+(# ast.Starred in unpacking) s
+/F-gs-font 10 10 SF
+24 175 M (33:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 175 M
+(not_x = ) s
+/Courier-Bold 10 10 SUF
+96 175 M
+(not) s
+/F-gs-font 10 10 SF
+114 175 M
+( x  ) s
+/Courier-Oblique 10 10 SUF
+138 175 M
+(# ast.UnaryOp) s
+/F-gs-font 10 10 SF
+24 164 M (34:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 164 M
+(sum_xy = x[0] + y[1]  ) s
+/Courier-Oblique 10 10 SUF
+180 164 M
+(# ast.BinOp) s
+/F-gs-font 10 10 SF
+24 153 M (35:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 153 M
+(comparison = x[0] < y[1]  ) s
+/Courier-Oblique 10 10 SUF
+204 153 M
+(# ast.Compare) s
+/F-gs-font 10 10 SF
+24 142 M (36:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+24 131 M (37:) s
+/Courier-Oblique 10 10 SUF
+48 131 M
+(# Call, IfExp, Attribute, NamedExpr, Subscript, Slice) s
+/F-gs-font 10 10 SF
+24 120 M (38:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 120 M
+(result = len\(x\)  ) s
+/Courier-Oblique 10 10 SUF
+150 120 M
+(# ast.Call) s
+/F-gs-font 10 10 SF
+24 109 M (39:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 109 M
+(max_value = x[0] ) s
+/Courier-Bold 10 10 SUF
+150 109 M
+(if) s
+/F-gs-font 10 10 SF
+162 109 M
+( x[0] > y[0] ) s
+/Courier-Bold 10 10 SUF
+240 109 M
+(else) s
+/F-gs-font 10 10 SF
+264 109 M
+( y[0]  ) s
+/Courier-Oblique 10 10 SUF
+306 109 M
+(# ast.IfExp) s
+/F-gs-font 10 10 SF
+24 98 M (40:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 98 M
+(attribute_access = result.bit_length\(\)  ) s
+/Courier-Oblique 10 10 SUF
+288 98 M
+(# ast.Attribute) s
+/F-gs-font 10 10 SF
+24 87 M (41:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+/Courier-Bold 10 10 SUF
+48 87 M
+(if) s
+/F-gs-font 10 10 SF
+60 87 M
+( \(n := len\(x\)\) > 2:  ) s
+/Courier-Oblique 10 10 SUF
+186 87 M
+(# ast.NamedExpr) s
+/F-gs-font 10 10 SF
+24 76 M (42:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 76 M
+(    ) s
+/Courier-Bold 10 10 SUF
+72 76 M
+(print) s
+/F-gs-font 10 10 SF
+102 76 M
+(\(f) s
+/Courier-Bold 10 10 SUF
+114 76 M
+("List is longer than 2, length is {n}") s
+/F-gs-font 10 10 SF
+342 76 M
+(\)) s
+24 65 M (43:) s
+48 65 M
+(list_slice = x[1:2]  ) s
+/Courier-Oblique 10 10 SUF
+174 65 M
+(# ast.Subscript with ast.Slice) s
+/F-gs-font 10 10 SF
+24 54 M (44:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+24 43 M (45:) s
+/Courier-Oblique 10 10 SUF
+48 43 M
+(# SetComp, GeneratorExp, DictComp) s
+/F-gs-font 10 10 SF
+24 32 M (46:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 32 M
+(set_comp = {i*2 ) s
+/Courier-Bold 10 10 SUF
+144 32 M
+(for) s
+/F-gs-font 10 10 SF
+162 32 M
+( i ) s
+/Courier-Bold 10 10 SUF
+180 32 M
+(in) s
+/F-gs-font 10 10 SF
+192 32 M
+( x}  ) s
+/Courier-Oblique 10 10 SUF
+222 32 M
+(# ast.SetComp) s
+/F-gs-font 10 10 SF
+24 21 M (47:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 21 M
+(generator_exp = \(i*2 ) s
+/Courier-Bold 10 10 SUF
+174 21 M
+(for) s
+/F-gs-font 10 10 SF
+192 21 M
+( i ) s
+/Courier-Bold 10 10 SUF
+210 21 M
+(in) s
+/F-gs-font 10 10 SF
+222 21 M
+( x\)  ) s
+/Courier-Oblique 10 10 SUF
+252 21 M
+(# ast.GeneratorExp) s
+/F-gs-font 10 10 SF
+24 10 M (48:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 10 M
+(dict_comp = {i: i*2 ) s
+/Courier-Bold 10 10 SUF
+168 10 M
+(for) s
+/F-gs-font 10 10 SF
+186 10 M
+( i ) s
+/Courier-Bold 10 10 SUF
+204 10 M
+(in) s
+/F-gs-font 10 10 SF
+216 10 M
+( x}  ) s
+/Courier-Oblique 10 10 SUF
+246 10 M
+(# ast.DictComp) s
+_R
+S
+%%Page: (2) 2
+%%BeginPageSetup
+_S
+90 rotate
+36 -594 translate
+/pagenum 2 def
+/fname (all_syntax_constructs.py) def
+/fdir (.) def
+/ftail (all_syntax_constructs.py) def
+/Courier-Oblique 10 10 SUF
+% User defined strings:
+/pagenumstr (2) def
+/moddatestr (02/16/24) def
+/modtimestr (22:09:32) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+/F-gs-font 10 10 SF
+24 527 M (49:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+24 516 M (50:) s
+/Courier-Oblique 10 10 SUF
+48 516 M
+(# Comprehension, Assign, AnnAssign, AugAssign) s
+/F-gs-font 10 10 SF
+24 505 M (51:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 505 M
+(comprehension = [i ) s
+/Courier-Bold 10 10 SUF
+162 505 M
+(for) s
+/F-gs-font 10 10 SF
+180 505 M
+( i ) s
+/Courier-Bold 10 10 SUF
+198 505 M
+(in) s
+/F-gs-font 10 10 SF
+210 505 M
+( x ) s
+/Courier-Bold 10 10 SUF
+228 505 M
+(if) s
+/F-gs-font 10 10 SF
+240 505 M
+( i > 1]  ) s
+/Courier-Oblique 10 10 SUF
+294 505 M
+(# ast.comprehension in ListComp) s
+/F-gs-font 10 10 SF
+24 494 M (52:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 494 M
+(x[0] = 10  ) s
+/Courier-Oblique 10 10 SUF
+114 494 M
+(# ast.Assign) s
+/F-gs-font 10 10 SF
+24 483 M (53:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 483 M
+(count: int = 0  ) s
+/Courier-Oblique 10 10 SUF
+144 483 M
+(# ast.AnnAssign) s
+/F-gs-font 10 10 SF
+24 472 M (54:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 472 M
+(count += 1  ) s
+/Courier-Oblique 10 10 SUF
+120 472 M
+(# ast.AugAssign) s
+/F-gs-font 10 10 SF
+24 461 M (55:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+24 450 M (56:) s
+/Courier-Oblique 10 10 SUF
+48 450 M
+(# For, AsyncFor, With, AsyncWith, FunctionDef, Lambda, YieldFrom, Await, ClassDef) s
+/F-gs-font 10 10 SF
+24 439 M (57:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 439 M
+(async ) s
+/Courier-Bold 10 10 SUF
+84 439 M
+(def) s
+/F-gs-font 10 10 SF
+102 439 M
+( ) s
+/Courier-Bold 10 10 SUF
+108 439 M
+(async_loop) s
+/F-gs-font 10 10 SF
+168 439 M
+(\(items\):  ) s
+/Courier-Oblique 10 10 SUF
+228 439 M
+(# ast.AsyncFor) s
+/F-gs-font 10 10 SF
+24 428 M (58:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 428 M
+(    async ) s
+/Courier-Bold 10 10 SUF
+108 428 M
+(for) s
+/F-gs-font 10 10 SF
+126 428 M
+( item ) s
+/Courier-Bold 10 10 SUF
+162 428 M
+(in) s
+/F-gs-font 10 10 SF
+174 428 M
+( items:) s
+24 417 M (59:) s
+48 417 M
+(        ) s
+/Courier-Bold 10 10 SUF
+96 417 M
+(print) s
+/F-gs-font 10 10 SF
+126 417 M
+(\(item\)) s
+24 406 M (60:) s
+24 395 M (61:) s
+48 395 M
+(async ) s
+/Courier-Bold 10 10 SUF
+84 395 M
+(def) s
+/F-gs-font 10 10 SF
+102 395 M
+( ) s
+/Courier-Bold 10 10 SUF
+108 395 M
+(async_read) s
+/F-gs-font 10 10 SF
+168 395 M
+(\(file\):  ) s
+/Courier-Oblique 10 10 SUF
+222 395 M
+(# ast.AsyncWith) s
+/F-gs-font 10 10 SF
+24 384 M (62:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 384 M
+(    async with AsyncOpen\(file, ) s
+/Courier-Bold 10 10 SUF
+234 384 M
+('r') s
+/F-gs-font 10 10 SF
+252 384 M
+(\) as f:) s
+24 373 M (63:) s
+48 373 M
+(        ) s
+/Courier-Bold 10 10 SUF
+96 373 M
+(return) s
+/F-gs-font 10 10 SF
+132 373 M
+( await f.read\(\)  ) s
+/Courier-Oblique 10 10 SUF
+234 373 M
+(# ast.Await) s
+/F-gs-font 10 10 SF
+24 362 M (64:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+24 351 M (65:) s
+/Courier-Bold 10 10 SUF
+48 351 M
+(def) s
+/F-gs-font 10 10 SF
+66 351 M
+( ) s
+/Courier-Bold 10 10 SUF
+72 351 M
+(function_def) s
+/F-gs-font 10 10 SF
+144 351 M
+(\(x, y\):  ) s
+/Courier-Oblique 10 10 SUF
+198 351 M
+(# ast.FunctionDef) s
+/F-gs-font 10 10 SF
+24 340 M (66:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 340 M
+(    ) s
+/Courier-Bold 10 10 SUF
+72 340 M
+(return) s
+/F-gs-font 10 10 SF
+108 340 M
+( x + y) s
+24 329 M (67:) s
+24 318 M (68:) s
+48 318 M
+(lambda_func = ) s
+/Courier-Bold 10 10 SUF
+132 318 M
+(lambda) s
+/F-gs-font 10 10 SF
+168 318 M
+( x, y: x + y  ) s
+/Courier-Oblique 10 10 SUF
+252 318 M
+(# ast.Lambda) s
+/F-gs-font 10 10 SF
+24 307 M (69:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+24 296 M (70:) s
+/Courier-Bold 10 10 SUF
+48 296 M
+(def) s
+/F-gs-font 10 10 SF
+66 296 M
+( ) s
+/Courier-Bold 10 10 SUF
+72 296 M
+(generator_func) s
+/F-gs-font 10 10 SF
+156 296 M
+(\(\):  ) s
+/Courier-Oblique 10 10 SUF
+186 296 M
+(# ast.YieldFrom) s
+/F-gs-font 10 10 SF
+24 285 M (71:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 285 M
+(    ) s
+/Courier-Bold 10 10 SUF
+72 285 M
+(yield) s
+/F-gs-font 10 10 SF
+102 285 M
+( ) s
+/Courier-Bold 10 10 SUF
+108 285 M
+(from) s
+/F-gs-font 10 10 SF
+132 285 M
+( range\(10\)) s
+24 274 M (72:) s
+24 263 M (73:) s
+/Courier-Oblique 10 10 SUF
+48 263 M
+(# Using ExampleClass) s
+/F-gs-font 10 10 SF
+24 252 M (74:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 252 M
+(example_instance = ExampleClass\() s
+/Courier-Bold 10 10 SUF
+240 252 M
+("Example") s
+/F-gs-font 10 10 SF
+294 252 M
+(\)) s
+24 241 M (75:) s
+24 230 M (76:) s
+/Courier-Oblique 10 10 SUF
+48 230 M
+(# Call the function) s
+/F-gs-font 10 10 SF
+24 219 M (77:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 219 M
+(function_result = function_def\(5, 3\)) s
+24 208 M (78:) s
+24 197 M (79:) s
+/Courier-Oblique 10 10 SUF
+48 197 M
+(# Use the lambda) s
+/F-gs-font 10 10 SF
+24 186 M (80:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 186 M
+(lambda_result = lambda_func\(2, 3\)) s
+24 175 M (81:) s
+24 164 M (82:) s
+/Courier-Oblique 10 10 SUF
+48 164 M
+(# Instantiate the class and call a method) s
+/F-gs-font 10 10 SF
+24 153 M (83:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 153 M
+(example_instance = ExampleClass\() s
+/Courier-Bold 10 10 SUF
+240 153 M
+("Example") s
+/F-gs-font 10 10 SF
+294 153 M
+(\)) s
+24 142 M (84:) s
+24 131 M (85:) s
+/Courier-Oblique 10 10 SUF
+48 131 M
+(# Asynchronous operations require running an event loop) s
+/F-gs-font 10 10 SF
+24 120 M (86:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 120 M
+(async ) s
+/Courier-Bold 10 10 SUF
+84 120 M
+(def) s
+/F-gs-font 10 10 SF
+102 120 M
+( ) s
+/Courier-Bold 10 10 SUF
+108 120 M
+(run_async_operations) s
+/F-gs-font 10 10 SF
+228 120 M
+(\(file\):) s
+24 109 M (87:) s
+48 109 M
+(    ) s
+/Courier-Oblique 10 10 SUF
+72 109 M
+(# Call the async method) s
+/F-gs-font 10 10 SF
+24 98 M (88:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 98 M
+(    async_result = await example_instance.async_method\(\)) s
+24 87 M (89:) s
+24 76 M (90:) s
+48 76 M
+(    async ) s
+/Courier-Bold 10 10 SUF
+108 76 M
+(def) s
+/F-gs-font 10 10 SF
+126 76 M
+( ) s
+/Courier-Bold 10 10 SUF
+132 76 M
+(items) s
+/F-gs-font 10 10 SF
+162 76 M
+(\(\):) s
+24 65 M (91:) s
+48 65 M
+(        ) s
+/Courier-Bold 10 10 SUF
+96 65 M
+(yield) s
+/F-gs-font 10 10 SF
+126 65 M
+( 1) s
+24 54 M (92:) s
+48 54 M
+(        ) s
+/Courier-Bold 10 10 SUF
+96 54 M
+(yield) s
+/F-gs-font 10 10 SF
+126 54 M
+( 2) s
+24 43 M (93:) s
+48 43 M
+(        ) s
+/Courier-Bold 10 10 SUF
+96 43 M
+(yield) s
+/F-gs-font 10 10 SF
+126 43 M
+( 3) s
+24 32 M (94:) s
+48 32 M
+(    ) s
+24 21 M (95:) s
+48 21 M
+(    ) s
+/Courier-Oblique 10 10 SUF
+72 21 M
+(# Call the async loop) s
+/F-gs-font 10 10 SF
+24 10 M (96:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 10 M
+(    await async_loop\(items\(\)\)) s
+_R
+S
+%%Page: (3) 3
+%%BeginPageSetup
+_S
+90 rotate
+36 -594 translate
+/pagenum 3 def
+/fname (all_syntax_constructs.py) def
+/fdir (.) def
+/ftail (all_syntax_constructs.py) def
+% User defined strings:
+/pagenumstr (3) def
+/moddatestr (02/16/24) def
+/modtimestr (22:09:32) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+24 527 M (97:) s
+24 516 M (98:) s
+48 516 M
+(    ) s
+/Courier-Oblique 10 10 SUF
+72 516 M
+(# Call async_read) s
+/F-gs-font 10 10 SF
+24 505 M (99:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 505 M
+(    async_read_result = await async_read\() s
+/Courier-Bold 10 10 SUF
+294 505 M
+('file.txt') s
+/F-gs-font 10 10 SF
+354 505 M
+(\)) s
+18 494 M (100:) s
+18 483 M (101:) s
+/Courier-Oblique 10 10 SUF
+48 483 M
+(# Multiplication with sequences) s
+/F-gs-font 10 10 SF
+18 472 M (102:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 472 M
+(sequence_multiplication = [1, 2, 3] * 2  ) s
+/Courier-Oblique 10 10 SUF
+294 472 M
+(# Repeats the list) s
+/F-gs-font 10 10 SF
+18 461 M (103:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+18 450 M (104:) s
+/Courier-Oblique 10 10 SUF
+48 450 M
+(# Modulus for formatting strings) s
+/F-gs-font 10 10 SF
+18 439 M (105:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 439 M
+(name = ) s
+/Courier-Bold 10 10 SUF
+90 439 M
+("World") s
+/F-gs-font 10 10 SF
+18 428 M (106:) s
+48 428 M
+(formatted_string = ) s
+/Courier-Bold 10 10 SUF
+162 428 M
+("Hello, %s!") s
+/F-gs-font 10 10 SF
+234 428 M
+( % name  ) s
+/Courier-Oblique 10 10 SUF
+288 428 M
+(# Old-style string formatting) s
+/F-gs-font 10 10 SF
+18 417 M (107:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+18 406 M (108:) s
+/Courier-Oblique 10 10 SUF
+48 406 M
+(# ast.In for membership tests) s
+/F-gs-font 10 10 SF
+18 395 M (109:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 395 M
+(item = 2) s
+18 384 M (110:) s
+48 384 M
+(container = [1, 2, 3, 4, 5]) s
+18 373 M (111:) s
+48 373 M
+(membership_test = item ) s
+/Courier-Bold 10 10 SUF
+186 373 M
+(in) s
+/F-gs-font 10 10 SF
+198 373 M
+( container  ) s
+/Courier-Oblique 10 10 SUF
+270 373 M
+(# This will use ast.Compare with ast.In) s
+/F-gs-font 10 10 SF
+18 362 M (112:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+/Courier-Bold 10 10 SUF
+48 362 M
+(print) s
+/F-gs-font 10 10 SF
+78 362 M
+(\(f) s
+/Courier-Bold 10 10 SUF
+90 362 M
+("Item in container: {membership_test}") s
+/F-gs-font 10 10 SF
+318 362 M
+(\)) s
+18 351 M (113:) s
+18 340 M (114:) s
+/Courier-Oblique 10 10 SUF
+48 340 M
+(# A more complex example of kwargs with a function that calculates an operation) s
+/F-gs-font 10 10 SF
+18 329 M (115:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+/Courier-Bold 10 10 SUF
+48 329 M
+(def) s
+/F-gs-font 10 10 SF
+66 329 M
+( ) s
+/Courier-Bold 10 10 SUF
+72 329 M
+(calculate_operation) s
+/F-gs-font 10 10 SF
+186 329 M
+(\(x, y, operation=) s
+/Courier-Bold 10 10 SUF
+288 329 M
+('add') s
+/F-gs-font 10 10 SF
+318 329 M
+(\):) s
+18 318 M (116:) s
+48 318 M
+(    ) s
+/Courier-Bold 10 10 SUF
+72 318 M
+(if) s
+/F-gs-font 10 10 SF
+84 318 M
+( operation == ) s
+/Courier-Bold 10 10 SUF
+168 318 M
+('add') s
+/F-gs-font 10 10 SF
+198 318 M
+(:) s
+18 307 M (117:) s
+48 307 M
+(        ) s
+/Courier-Bold 10 10 SUF
+96 307 M
+(return) s
+/F-gs-font 10 10 SF
+132 307 M
+( x + y) s
+18 296 M (118:) s
+48 296 M
+(    ) s
+/Courier-Bold 10 10 SUF
+72 296 M
+(elif) s
+/F-gs-font 10 10 SF
+96 296 M
+( operation == ) s
+/Courier-Bold 10 10 SUF
+180 296 M
+('subtract') s
+/F-gs-font 10 10 SF
+240 296 M
+(:) s
+18 285 M (119:) s
+48 285 M
+(        ) s
+/Courier-Bold 10 10 SUF
+96 285 M
+(return) s
+/F-gs-font 10 10 SF
+132 285 M
+( x - y) s
+18 274 M (120:) s
+48 274 M
+(    ) s
+/Courier-Bold 10 10 SUF
+72 274 M
+(elif) s
+/F-gs-font 10 10 SF
+96 274 M
+( operation == ) s
+/Courier-Bold 10 10 SUF
+180 274 M
+('multiply') s
+/F-gs-font 10 10 SF
+240 274 M
+(:) s
+18 263 M (121:) s
+48 263 M
+(        ) s
+/Courier-Bold 10 10 SUF
+96 263 M
+(return) s
+/F-gs-font 10 10 SF
+132 263 M
+( x * y) s
+18 252 M (122:) s
+48 252 M
+(    ) s
+/Courier-Bold 10 10 SUF
+72 252 M
+(elif) s
+/F-gs-font 10 10 SF
+96 252 M
+( operation == ) s
+/Courier-Bold 10 10 SUF
+180 252 M
+('divide') s
+/F-gs-font 10 10 SF
+228 252 M
+(:) s
+18 241 M (123:) s
+48 241 M
+(        ) s
+/Courier-Bold 10 10 SUF
+96 241 M
+(return) s
+/F-gs-font 10 10 SF
+132 241 M
+( x / y) s
+18 230 M (124:) s
+48 230 M
+(    ) s
+/Courier-Bold 10 10 SUF
+72 230 M
+(else) s
+/F-gs-font 10 10 SF
+96 230 M
+(:) s
+18 219 M (125:) s
+48 219 M
+(        ) s
+/Courier-Bold 10 10 SUF
+96 219 M
+(return) s
+/F-gs-font 10 10 SF
+132 219 M
+( ) s
+/Courier-Bold 10 10 SUF
+138 219 M
+("Unknown operation") s
+/F-gs-font 10 10 SF
+18 208 M (126:) s
+18 197 M (127:) s
+/Courier-Oblique 10 10 SUF
+48 197 M
+(# Calling the function with kwargs) s
+/F-gs-font 10 10 SF
+18 186 M (128:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 186 M
+(result_add = calculate_operation\(x=5, y=3, operation=) s
+/Courier-Bold 10 10 SUF
+366 186 M
+('add') s
+/F-gs-font 10 10 SF
+396 186 M
+(\)) s
+18 175 M (129:) s
+18 164 M (130:) s
+48 164 M
+(result_multiply = calculate_operation\(x=5, y=3, operation=) s
+/Courier-Bold 10 10 SUF
+396 164 M
+('multiply') s
+/F-gs-font 10 10 SF
+456 164 M
+(\)) s
+18 153 M (131:) s
+18 142 M (132:) s
+/Courier-Oblique 10 10 SUF
+48 142 M
+(# Assigning to a slice of a list) s
+/F-gs-font 10 10 SF
+18 131 M (133:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 131 M
+(numbers = [0, 0, 0, 0, 0]  ) s
+/Courier-Oblique 10 10 SUF
+210 131 M
+(# A list of five zeros) s
+/F-gs-font 10 10 SF
+18 120 M (134:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+18 109 M (135:) s
+/Courier-Oblique 10 10 SUF
+48 109 M
+(# Replace a slice of the list with new values) s
+/F-gs-font 10 10 SF
+18 98 M (136:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 98 M
+(numbers[1:4] = [1, 2, 3]  ) s
+/Courier-Oblique 10 10 SUF
+204 98 M
+(# This modifies the list in place) s
+/F-gs-font 10 10 SF
+18 87 M (137:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+18 76 M (138:) s
+/Courier-Oblique 10 10 SUF
+48 76 M
+(# Unary operation for negation) s
+/F-gs-font 10 10 SF
+18 65 M (139:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 65 M
+(negative_number = -10) s
+_R
+S
+%%Trailer
+%%Pages: 3
+%%DocumentNeededResources: font Times-Roman Courier-Oblique Courier-Bold 
+%%+ font Courier Times-Bold 
+%%EOF

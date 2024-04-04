@@ -1,0 +1,83 @@
+builtins.list[Tuple[Any, builtins.str]]/builtins.list[Tuple[Any, builtins.str]]/builtins.list[Tuple[Any, builtins.int]]/builtins.list[Tuple[Any, Any]]
+builtins.str
+builtins.str/builtins.list[Tuple[Union[None, builtins.str], builtins.str]]/builtins.list[builtins.str]
+builtins.list[Tuple[Any, builtins.str]]/builtins.list[Tuple[Any, builtins.int]]/builtins.list[Tuple[Any, Any]]
+builtins.str
+builtins.str
+imp.Concat
+imp.Parser
+imp.Exp
+imp.Parser
+imp.Alternate
+imp.Parser
+imp.Process
+imp.Parser
+imp.Result
+builtins.str/builtins.list[builtins.str]
+builtins.int/builtins.bool
+imp.Result
+builtins.str/builtins.list[builtins.str]
+builtins.int/builtins.bool
+imp.Result
+builtins.object
+builtins.object
+imp.Result
+builtins.object
+builtins.object
+imp.Result
+builtins.object
+builtins.object
+imp.Result
+builtins.object
+builtins.int/builtins.bool
+Any
+builtins.object
+builtins.object/builtins.int/builtins.float
+imp.Result
+builtins.object
+builtins.object
+imp.Result
+builtins.object
+builtins.object
+imp.Result
+Any
+builtins.object
+builtins.bool
+builtins.object
+builtins.bool
+builtins.object
+builtins.str
+None
+builtins.dict[builtins.int, builtins.str]
+builtins.str
+None
+builtins.dict[builtins.int, builtins.str]/builtins.dict[builtins.bool, builtins.str]
+builtins.str
+None
+builtins.dict[builtins.int, builtins.str]/builtins.dict[builtins.bool, builtins.str]
+builtins.str
+None
+builtins.dict[builtins.bool, builtins.str]/builtins.dict[builtins.int, builtins.str]
+builtins.str
+builtins.int
+builtins.object
+builtins.str
+builtins.object
+builtins.dict[builtins.object, builtins.object]
+builtins.str
+<partial None>
+builtins.dict[builtins.bool, builtins.str]/builtins.dict[builtins.int, builtins.str]
+builtins.str
+<partial None>
+builtins.dict[builtins.int, builtins.str]/builtins.dict[builtins.bool, builtins.str]
+builtins.str
+builtins.int
+builtins.dict[builtins.bool, builtins.str]/builtins.dict[builtins.int, builtins.str]
+builtins.str
+builtins.int
+builtins.dict[builtins.int, builtins.str]/builtins.dict[builtins.bool, builtins.str]
+builtins.str
+builtins.bool
+builtins.dict[builtins.int, builtins.str]/builtins.dict[builtins.bool, builtins.str]
+imp.Reserved
+builtins.str

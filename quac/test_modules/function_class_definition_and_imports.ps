@@ -1,0 +1,982 @@
+%!PS-Adobe-3.0
+%%BoundingBox: 18 36 594 756
+%%Title: Enscript Output
+%%Creator: GNU Enscript 1.6.5.90
+%%CreationDate: Tue Feb 13 21:18:57 2024
+%%Orientation: Landscape
+%%Pages: (atend)
+%%DocumentMedia: Letter 612 792 0 () ()
+%%DocumentNeededResources: (atend)
+%%EndComments
+%%BeginProlog
+%%BeginResource: procset Enscript-Prolog 1.6.5 90
+%
+% Procedures.
+%
+
+/_S {	% save current state
+  /_s save def
+} def
+/_R {	% restore from saved state
+  _s restore
+} def
+
+/S {	% showpage protecting gstate
+  gsave
+  showpage
+  grestore
+} bind def
+
+/MF {	% fontname newfontname -> -	make a new encoded font
+  /newfontname exch def
+  /fontname exch def
+
+  /fontdict fontname findfont def
+  /newfont fontdict maxlength dict def
+
+  fontdict {
+    exch
+    dup /FID eq {
+      % skip FID pair
+      pop pop
+    } {
+      % copy to the new font dictionary
+      exch newfont 3 1 roll put
+    } ifelse
+  } forall
+
+  newfont /FontName newfontname put
+
+  % insert only valid encoding vectors
+  encoding_vector length 256 eq {
+    newfont /Encoding encoding_vector put
+  } if
+
+  newfontname newfont definefont pop
+} def
+
+/MF_PS { % fontname newfontname -> -	make a new font preserving its enc
+  /newfontname exch def
+  /fontname exch def
+
+  /fontdict fontname findfont def
+  /newfont fontdict maxlength dict def
+
+  fontdict {
+    exch
+    dup /FID eq {
+      % skip FID pair
+      pop pop
+    } {
+      % copy to the new font dictionary
+      exch newfont 3 1 roll put
+    } ifelse
+  } forall
+
+  newfont /FontName newfontname put
+
+  newfontname newfont definefont pop
+} def
+
+/SF { % fontname width height -> -	set a new font
+  /height exch def
+  /width exch def
+
+  findfont
+  [width 0 0 height 0 0] makefont setfont
+} def
+
+/SUF { % fontname width height -> -	set a new user font
+  /height exch def
+  /width exch def
+
+  /F-gs-user-font MF
+  /F-gs-user-font width height SF
+} def
+
+/SUF_PS { % fontname width height -> -	set a new user font preserving its enc
+  /height exch def
+  /width exch def
+
+  /F-gs-user-font MF_PS
+  /F-gs-user-font width height SF
+} def
+
+/M {moveto} bind def
+/s {show} bind def
+
+/Box {	% x y w h -> -			define box path
+  /d_h exch def /d_w exch def /d_y exch def /d_x exch def
+  d_x d_y  moveto
+  d_w 0 rlineto
+  0 d_h rlineto
+  d_w neg 0 rlineto
+  closepath
+} def
+
+/bgs {	% x y height blskip gray str -> -	show string with bg color
+  /str exch def
+  /gray exch def
+  /blskip exch def
+  /height exch def
+  /y exch def
+  /x exch def
+
+  gsave
+    x y blskip sub str stringwidth pop height Box
+    gray setgray
+    fill
+  grestore
+  x y M str s
+} def
+
+/bgcs { % x y height blskip red green blue str -> -  show string with bg color
+  /str exch def
+  /blue exch def
+  /green exch def
+  /red exch def
+  /blskip exch def
+  /height exch def
+  /y exch def
+  /x exch def
+
+  gsave
+    x y blskip sub str stringwidth pop height Box
+    red green blue setrgbcolor
+    fill
+  grestore
+  x y M str s
+} def
+
+% Highlight bars.
+/highlight_bars {	% nlines lineheight output_y_margin gray -> -
+  gsave
+    setgray
+    /ymarg exch def
+    /lineheight exch def
+    /nlines exch def
+
+    % This 2 is just a magic number to sync highlight lines to text.
+    0 d_header_y ymarg sub 2 sub translate
+
+    /cw d_output_w cols div def
+    /nrows d_output_h ymarg 2 mul sub lineheight div cvi def
+
+    % for each column
+    0 1 cols 1 sub {
+      cw mul /xp exch def
+
+      % for each rows
+      0 1 nrows 1 sub {
+        /rn exch def
+        rn lineheight mul neg /yp exch def
+        rn nlines idiv 2 mod 0 eq {
+	  % Draw highlight bar.  4 is just a magic indentation.
+	  xp 4 add yp cw 8 sub lineheight neg Box fill
+	} if
+      } for
+    } for
+
+  grestore
+} def
+
+% Line highlight bar.
+/line_highlight {	% x y width height gray -> -
+  gsave
+    /gray exch def
+    Box gray setgray fill
+  grestore
+} def
+
+% Column separator lines.
+/column_lines {
+  gsave
+    .1 setlinewidth
+    0 d_footer_h translate
+    /cw d_output_w cols div def
+    1 1 cols 1 sub {
+      cw mul 0 moveto
+      0 d_output_h rlineto stroke
+    } for
+  grestore
+} def
+
+% Column borders.
+/column_borders {
+  gsave
+    .1 setlinewidth
+    0 d_footer_h moveto
+    0 d_output_h rlineto
+    d_output_w 0 rlineto
+    0 d_output_h neg rlineto
+    closepath stroke
+  grestore
+} def
+
+% Do the actual underlay drawing
+/draw_underlay {
+  ul_style 0 eq {
+    ul_str true charpath stroke
+  } {
+    ul_str show
+  } ifelse
+} def
+
+% Underlay
+/underlay {	% - -> -
+  gsave
+    0 d_page_h translate
+    d_page_h neg d_page_w atan rotate
+
+    ul_gray setgray
+    ul_font setfont
+    /dw d_page_h dup mul d_page_w dup mul add sqrt def
+    ul_str stringwidth pop dw exch sub 2 div ul_h_ptsize -2 div moveto
+    draw_underlay
+  grestore
+} def
+
+/user_underlay {	% - -> -
+  gsave
+    ul_x ul_y translate
+    ul_angle rotate
+    ul_gray setgray
+    ul_font setfont
+    0 0 ul_h_ptsize 2 div sub moveto
+    draw_underlay
+  grestore
+} def
+
+% Page prefeed
+/page_prefeed {		% bool -> -
+  statusdict /prefeed known {
+    statusdict exch /prefeed exch put
+  } {
+    pop
+  } ifelse
+} def
+
+% Wrapped line markers
+/wrapped_line_mark {	% x y charwith charheight type -> -
+  /type exch def
+  /h exch def
+  /w exch def
+  /y exch def
+  /x exch def
+
+  type 2 eq {
+    % Black boxes (like TeX does)
+    gsave
+      0 setlinewidth
+      x w 4 div add y M
+      0 h rlineto w 2 div 0 rlineto 0 h neg rlineto
+      closepath fill
+    grestore
+  } {
+    type 3 eq {
+      % Small arrows
+      gsave
+        .2 setlinewidth
+        x w 2 div add y h 2 div add M
+        w 4 div 0 rlineto
+        x w 4 div add y lineto stroke
+
+        x w 4 div add w 8 div add y h 4 div add M
+        x w 4 div add y lineto
+	w 4 div h 8 div rlineto stroke
+      grestore
+    } {
+      % do nothing
+    } ifelse
+  } ifelse
+} def
+
+% EPSF import.
+
+/BeginEPSF {
+  /b4_Inc_state save def    		% Save state for cleanup
+  /dict_count countdictstack def	% Count objects on dict stack
+  /op_count count 1 sub def		% Count objects on operand stack
+  userdict begin
+  /showpage { } def
+  0 setgray 0 setlinecap
+  1 setlinewidth 0 setlinejoin
+  10 setmiterlimit [ ] 0 setdash newpath
+  /languagelevel where {
+    pop languagelevel
+    1 ne {
+      false setstrokeadjust false setoverprint
+    } if
+  } if
+} bind def
+
+/EndEPSF {
+  count op_count sub { pos } repeat	% Clean up stacks
+  countdictstack dict_count sub { end } repeat
+  b4_Inc_state restore
+} bind def
+
+% Check PostScript language level.
+/languagelevel where {
+  pop /gs_languagelevel languagelevel def
+} {
+  /gs_languagelevel 1 def
+} ifelse
+%%EndResource
+%%BeginResource: procset Enscript-Encoding-88591 1.6.5 90
+/encoding_vector [
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/space        	/exclam       	/quotedbl     	/numbersign   	
+/dollar       	/percent      	/ampersand    	/quoteright   	
+/parenleft    	/parenright   	/asterisk     	/plus         	
+/comma        	/hyphen       	/period       	/slash        	
+/zero         	/one          	/two          	/three        	
+/four         	/five         	/six          	/seven        	
+/eight        	/nine         	/colon        	/semicolon    	
+/less         	/equal        	/greater      	/question     	
+/at           	/A            	/B            	/C            	
+/D            	/E            	/F            	/G            	
+/H            	/I            	/J            	/K            	
+/L            	/M            	/N            	/O            	
+/P            	/Q            	/R            	/S            	
+/T            	/U            	/V            	/W            	
+/X            	/Y            	/Z            	/bracketleft  	
+/backslash    	/bracketright 	/asciicircum  	/underscore   	
+/quoteleft    	/a            	/b            	/c            	
+/d            	/e            	/f            	/g            	
+/h            	/i            	/j            	/k            	
+/l            	/m            	/n            	/o            	
+/p            	/q            	/r            	/s            	
+/t            	/u            	/v            	/w            	
+/x            	/y            	/z            	/braceleft    	
+/bar          	/braceright   	/tilde        	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/.notdef      	/.notdef      	/.notdef      	/.notdef      	
+/space        	/exclamdown   	/cent         	/sterling     	
+/currency     	/yen          	/brokenbar    	/section      	
+/dieresis     	/copyright    	/ordfeminine  	/guillemotleft	
+/logicalnot   	/hyphen       	/registered   	/macron       	
+/degree       	/plusminus    	/twosuperior  	/threesuperior	
+/acute        	/mu           	/paragraph    	/bullet       	
+/cedilla      	/onesuperior  	/ordmasculine 	/guillemotright	
+/onequarter   	/onehalf      	/threequarters	/questiondown 	
+/Agrave       	/Aacute       	/Acircumflex  	/Atilde       	
+/Adieresis    	/Aring        	/AE           	/Ccedilla     	
+/Egrave       	/Eacute       	/Ecircumflex  	/Edieresis    	
+/Igrave       	/Iacute       	/Icircumflex  	/Idieresis    	
+/Eth          	/Ntilde       	/Ograve       	/Oacute       	
+/Ocircumflex  	/Otilde       	/Odieresis    	/multiply     	
+/Oslash       	/Ugrave       	/Uacute       	/Ucircumflex  	
+/Udieresis    	/Yacute       	/Thorn        	/germandbls   	
+/agrave       	/aacute       	/acircumflex  	/atilde       	
+/adieresis    	/aring        	/ae           	/ccedilla     	
+/egrave       	/eacute       	/ecircumflex  	/edieresis    	
+/igrave       	/iacute       	/icircumflex  	/idieresis    	
+/eth          	/ntilde       	/ograve       	/oacute       	
+/ocircumflex  	/otilde       	/odieresis    	/divide       	
+/oslash       	/ugrave       	/uacute       	/ucircumflex  	
+/udieresis    	/yacute       	/thorn        	/ydieresis    	
+] def
+%%EndResource
+%%EndProlog
+%%BeginSetup
+%%IncludeResource: font Courier-Bold
+%%IncludeResource: font Courier
+/HFpt_w 10 def
+/HFpt_h 10 def
+/Courier-Bold /HF-gs-font MF
+/HF /HF-gs-font findfont [HFpt_w 0 0 HFpt_h 0 0] makefont def
+/Courier /F-gs-font MF
+/F-gs-font 10 10 SF
+/#copies 1 def
+% Pagedevice definitions:
+gs_languagelevel 1 gt {
+  <<
+    /PageSize [612 792] 
+  >> setpagedevice
+} if
+%%BeginResource: procset Enscript-Header-enscript 1.6.5 90
+%%IncludeResource: font Times-Bold
+%%IncludeResource: font Times-Roman
+
+% Fonts.
+/Times-Bold /HeaderFont-Bold MF
+/HeaderDateF /HeaderFont-Bold findfont 12 scalefont def
+
+/Times-Roman /HeaderFont-Times MF
+/HeaderHDRF /HeaderFont-Times findfont 14 scalefont def
+
+/HeaderPageNumF /Helvetica-Bold findfont 28.8 scalefont def
+
+/do_header {	% print enscript header
+  gsave
+    d_header_x d_header_y translate
+
+    % light bar
+    0 0 d_header_w d_header_h 2 div Box
+    .95 setgray fill
+
+    % dark gray boxes
+    /dbw d_header_h 2 mul def	% dark box width
+    /dbc .7 def			% dark box color
+
+    % left dark box.
+    0 0 dbw d_header_h Box
+    dbc setgray fill
+
+    0 setgray 
+    HeaderDateF setfont
+    moddatestr dup stringwidth pop dbw exch sub 2 div 
+    d_header_h 2 div 2 add moveto show
+    modtimestr dup stringwidth pop dbw exch sub 2 div 
+    d_header_h 5 div moveto show
+
+    % right dark box
+    d_header_w dbw sub 0 dbw d_header_h Box
+    dbc setgray fill
+
+    HeaderPageNumF setfont
+    1 setgray
+    pagenumstr dup
+    stringwidth pop dbw exch sub 2 div d_header_w dbw sub add
+    d_header_h .2 mul moveto show
+
+    % filename
+    0 setgray 
+    HeaderHDRF setfont
+    d_header_w fname stringwidth pop sub 2 div d_header_h 8 div moveto
+    fname show
+
+    % user supplied header string.
+    user_header_p {
+      /h d_header_h 8 div 5 mul def
+
+      % Implement strict enscript compatibility.
+      user_header_center_str () eq user_header_right_str () eq and {
+        d_header_w user_header_left_str stringwidth pop sub 2 div 
+        h moveto user_header_left_str show
+      } {
+        dbw 5 add h moveto user_header_left_str show
+
+        d_header_w user_header_center_str stringwidth pop sub 2 div 
+        h moveto user_header_center_str show
+
+	d_header_w dbw sub 5 sub user_header_right_str stringwidth pop
+	sub h moveto user_header_right_str show
+      } ifelse
+    } if
+
+  grestore
+} def
+%%EndResource
+/d_page_w 720 def
+/d_page_h 576 def
+/d_header_x 0 def
+/d_header_y 540 def
+/d_header_w 720 def
+/d_header_h 36 def
+/d_footer_x 0 def
+/d_footer_y 0 def
+/d_footer_w 720 def
+/d_footer_h 0 def
+/d_output_w 720 def
+/d_output_h 540 def
+/cols 1 def
+%%EndSetup
+%%Page: (1) 1
+%%BeginPageSetup
+_S
+90 rotate
+36 -594 translate
+/pagenum 1 def
+/fname (function_class_definition_and_imports.py) def
+/fdir (.) def
+/ftail (function_class_definition_and_imports.py) def
+% User defined strings:
+/pagenumstr (1) def
+/moddatestr (02/13/24) def
+/modtimestr (21:01:45) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+30 527 M (1:) s
+/Courier-Bold 10 10 SUF
+48 527 M
+(def) s
+/F-gs-font 10 10 SF
+66 527 M
+( ) s
+/Courier-Bold 10 10 SUF
+72 527 M
+(shell_sort) s
+/F-gs-font 10 10 SF
+132 527 M
+(\(collection\):) s
+30 516 M (2:) s
+48 516 M
+(    gaps = [701, 301, 132, 57, 23, 10, 4, 1]) s
+30 505 M (3:) s
+48 505 M
+(    ) s
+/Courier-Bold 10 10 SUF
+72 505 M
+(for) s
+/F-gs-font 10 10 SF
+90 505 M
+( gap ) s
+/Courier-Bold 10 10 SUF
+120 505 M
+(in) s
+/F-gs-font 10 10 SF
+132 505 M
+( gaps:) s
+30 494 M (4:) s
+48 494 M
+(        i = gap) s
+30 483 M (5:) s
+48 483 M
+(        ) s
+/Courier-Bold 10 10 SUF
+96 483 M
+(while) s
+/F-gs-font 10 10 SF
+126 483 M
+( i < len\(collection\):) s
+30 472 M (6:) s
+48 472 M
+(            temp = collection[i]) s
+30 461 M (7:) s
+48 461 M
+(            j = i) s
+30 450 M (8:) s
+48 450 M
+(            ) s
+/Courier-Bold 10 10 SUF
+120 450 M
+(while) s
+/F-gs-font 10 10 SF
+150 450 M
+( j >= gap ) s
+/Courier-Bold 10 10 SUF
+210 450 M
+(and) s
+/F-gs-font 10 10 SF
+228 450 M
+( collection[j - gap] > temp:) s
+30 439 M (9:) s
+48 439 M
+(                collection[j] = collection[j - gap]) s
+24 428 M (10:) s
+48 428 M
+(                j -= gap) s
+24 417 M (11:) s
+48 417 M
+(            collection[j] = temp) s
+24 406 M (12:) s
+48 406 M
+(            i += 1) s
+24 395 M (13:) s
+48 395 M
+(    ) s
+/Courier-Bold 10 10 SUF
+72 395 M
+(return) s
+/F-gs-font 10 10 SF
+108 395 M
+( collection) s
+24 384 M (14:) s
+24 373 M (15:) s
+24 362 M (16:) s
+/Courier-Bold 10 10 SUF
+48 362 M
+(def) s
+/F-gs-font 10 10 SF
+66 362 M
+( ) s
+/Courier-Bold 10 10 SUF
+72 362 M
+(set_x) s
+/F-gs-font 10 10 SF
+102 362 M
+(\(\):) s
+24 351 M (17:) s
+48 351 M
+(    ) s
+/Courier-Bold 10 10 SUF
+72 351 M
+(global) s
+/F-gs-font 10 10 SF
+108 351 M
+( x) s
+24 340 M (18:) s
+48 340 M
+(    x = 2) s
+24 329 M (19:) s
+48 329 M
+(    shell_sort\([1,2,3,4]\)) s
+24 318 M (20:) s
+24 307 M (21:) s
+24 296 M (22:) s
+/Courier-Oblique 10 10 SUF
+48 296 M
+(# Global from ... import ... statement for commonly used functions) s
+/F-gs-font 10 10 SF
+24 285 M (23:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+/Courier-Bold 10 10 SUF
+48 285 M
+(from) s
+/F-gs-font 10 10 SF
+72 285 M
+( random ) s
+/Courier-Bold 10 10 SUF
+120 285 M
+(import) s
+/F-gs-font 10 10 SF
+156 285 M
+( randint as global_randint, choice) s
+24 274 M (24:) s
+24 263 M (25:) s
+/Courier-Oblique 10 10 SUF
+48 263 M
+(# Global variable definition) s
+/F-gs-font 10 10 SF
+24 252 M (26:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 252 M
+(global_counter = 0) s
+24 241 M (27:) s
+24 230 M (28:) s
+/Courier-Oblique 10 10 SUF
+48 230 M
+(# Define a class with a method that includes a nested function) s
+/F-gs-font 10 10 SF
+24 219 M (29:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+/Courier-Bold 10 10 SUF
+48 219 M
+(class) s
+/F-gs-font 10 10 SF
+78 219 M
+( Counter:) s
+24 208 M (30:) s
+48 208 M
+(    ) s
+/Courier-Bold 10 10 SUF
+72 208 M
+(def) s
+/F-gs-font 10 10 SF
+90 208 M
+( ) s
+/Courier-Bold 10 10 SUF
+96 208 M
+(__init__) s
+/F-gs-font 10 10 SF
+144 208 M
+(\(self\):) s
+24 197 M (31:) s
+48 197 M
+(        ) s
+/Courier-Oblique 10 10 SUF
+96 197 M
+(# Instance variable to track counts) s
+/F-gs-font 10 10 SF
+24 186 M (32:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 186 M
+(        self.count = 0) s
+24 175 M (33:) s
+24 164 M (34:) s
+48 164 M
+(    ) s
+/Courier-Bold 10 10 SUF
+72 164 M
+(def) s
+/F-gs-font 10 10 SF
+90 164 M
+( ) s
+/Courier-Bold 10 10 SUF
+96 164 M
+(update_counter) s
+/F-gs-font 10 10 SF
+180 164 M
+(\(self\):) s
+24 153 M (35:) s
+48 153 M
+(        ) s
+/Courier-Oblique 10 10 SUF
+96 153 M
+(# Local import within the function for demonstration) s
+/F-gs-font 10 10 SF
+24 142 M (36:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 142 M
+(        ) s
+/Courier-Bold 10 10 SUF
+96 142 M
+(import) s
+/F-gs-font 10 10 SF
+132 142 M
+( time) s
+24 131 M (37:) s
+24 120 M (38:) s
+48 120 M
+(        ) s
+/Courier-Oblique 10 10 SUF
+96 120 M
+(# Method variable) s
+/F-gs-font 10 10 SF
+24 109 M (39:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 109 M
+(        method_counter = 0) s
+24 98 M (40:) s
+24 87 M (41:) s
+48 87 M
+(        ) s
+/Courier-Bold 10 10 SUF
+96 87 M
+(def) s
+/F-gs-font 10 10 SF
+114 87 M
+( ) s
+/Courier-Bold 10 10 SUF
+120 87 M
+(increment) s
+/F-gs-font 10 10 SF
+174 87 M
+(\(\):) s
+24 76 M (42:) s
+48 76 M
+(            ) s
+/Courier-Oblique 10 10 SUF
+120 76 M
+(# Use nonlocal to modify method_counter) s
+/F-gs-font 10 10 SF
+24 65 M (43:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 65 M
+(            nonlocal method_counter) s
+24 54 M (44:) s
+48 54 M
+(            ) s
+/Courier-Oblique 10 10 SUF
+120 54 M
+(# Use global to modify the global_counter) s
+/F-gs-font 10 10 SF
+24 43 M (45:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 43 M
+(            ) s
+/Courier-Bold 10 10 SUF
+120 43 M
+(global) s
+/F-gs-font 10 10 SF
+156 43 M
+( global_counter) s
+24 32 M (46:) s
+24 21 M (47:) s
+48 21 M
+(            ) s
+/Courier-Bold 10 10 SUF
+120 21 M
+(try) s
+/F-gs-font 10 10 SF
+138 21 M
+(:) s
+24 10 M (48:) s
+48 10 M
+(                ) s
+/Courier-Oblique 10 10 SUF
+144 10 M
+(# Use the globally imported global_randint function directly) s
+_R
+S
+%%Page: (2) 2
+%%BeginPageSetup
+_S
+90 rotate
+36 -594 translate
+/pagenum 2 def
+/fname (function_class_definition_and_imports.py) def
+/fdir (.) def
+/ftail (function_class_definition_and_imports.py) def
+/Courier-Oblique 10 10 SUF
+% User defined strings:
+/pagenumstr (2) def
+/moddatestr (02/13/24) def
+/modtimestr (21:01:45) def
+/user_header_p false def
+/user_footer_p false def
+%%EndPageSetup
+do_header
+/F-gs-font 10 10 SF
+24 527 M (49:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 527 M
+(                increment = global_randint\(1, 10\)) s
+24 516 M (50:) s
+48 516 M
+(                ) s
+/Courier-Oblique 10 10 SUF
+144 516 M
+(# Simulate a random error) s
+/F-gs-font 10 10 SF
+24 505 M (51:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 505 M
+(                ) s
+/Courier-Bold 10 10 SUF
+144 505 M
+(if) s
+/F-gs-font 10 10 SF
+156 505 M
+( choice\([True, False]\):) s
+24 494 M (52:) s
+48 494 M
+(                    ) s
+/Courier-Bold 10 10 SUF
+168 494 M
+(raise) s
+/F-gs-font 10 10 SF
+198 494 M
+( ValueError\() s
+/Courier-Bold 10 10 SUF
+270 494 M
+("Simulated error") s
+/F-gs-font 10 10 SF
+372 494 M
+(\)) s
+24 483 M (53:) s
+24 472 M (54:) s
+48 472 M
+(                method_counter += increment) s
+24 461 M (55:) s
+48 461 M
+(                global_counter += increment) s
+24 450 M (56:) s
+48 450 M
+(                self.count += increment) s
+24 439 M (57:) s
+24 428 M (58:) s
+48 428 M
+(                ) s
+/Courier-Oblique 10 10 SUF
+144 428 M
+(# Demonstrating the use of the locally imported time module) s
+/F-gs-font 10 10 SF
+24 417 M (59:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 417 M
+(                time.sleep\(1\)  ) s
+/Courier-Oblique 10 10 SUF
+234 417 M
+(# Sleep for 1 second to simulate a delay) s
+/F-gs-font 10 10 SF
+24 406 M (60:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+24 395 M (61:) s
+48 395 M
+(                ) s
+/Courier-Bold 10 10 SUF
+144 395 M
+(print) s
+/F-gs-font 10 10 SF
+174 395 M
+(\(f) s
+/Courier-Bold 10 10 SUF
+186 395 M
+("Method counter incremented by {increment}, total method counter: {method_counter}") s
+/F-gs-font 10 10 SF
+684 395 M
+(\)) s
+24 384 M (62:) s
+48 384 M
+(                ) s
+/Courier-Bold 10 10 SUF
+144 384 M
+(print) s
+/F-gs-font 10 10 SF
+174 384 M
+(\(f) s
+/Courier-Bold 10 10 SUF
+186 384 M
+("Global counter updated to {global_counter}, instance counter: {self.count}") s
+/F-gs-font 10 10 SF
+642 384 M
+(\)) s
+24 373 M (63:) s
+48 373 M
+(            ) s
+24 362 M (64:) s
+48 362 M
+(            ) s
+/Courier-Bold 10 10 SUF
+120 362 M
+(except) s
+/F-gs-font 10 10 SF
+156 362 M
+( ValueError as e:) s
+24 351 M (65:) s
+48 351 M
+(                ) s
+/Courier-Bold 10 10 SUF
+144 351 M
+(print) s
+/F-gs-font 10 10 SF
+174 351 M
+(\(f) s
+/Courier-Bold 10 10 SUF
+186 351 M
+("Exception caught: {e}") s
+/F-gs-font 10 10 SF
+324 351 M
+(\)) s
+24 340 M (66:) s
+24 329 M (67:) s
+48 329 M
+(        increment\(\)) s
+24 318 M (68:) s
+24 307 M (69:) s
+/Courier-Oblique 10 10 SUF
+48 307 M
+(# Instantiate the class and call the method) s
+/F-gs-font 10 10 SF
+24 296 M (70:) s
+/Courier-Oblique 10 10 SUF
+/F-gs-font 10 10 SF
+48 296 M
+(counter_instance = Counter\(\)) s
+_R
+S
+%%Trailer
+%%Pages: 2
+%%DocumentNeededResources: font Times-Roman Courier-Oblique Courier-Bold 
+%%+ font Courier Times-Bold 
+%%EOF

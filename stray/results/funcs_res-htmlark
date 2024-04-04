@@ -1,0 +1,16 @@
+builtins.list[builtins.str]
+Tuple[Any, Union[None, builtins.str]]
+builtins.str
+builtins.str
+builtins.str
+builtins.bytes
+builtins.str
+builtins.str
+builtins.str
+def (severity: Any, message_type: Any, message_data: Any) -> Any
+builtins.object
+builtins.object
+builtins.object
+builtins.object
+argparse.Namespace
+None

@@ -1,0 +1,16 @@
+list[str]
+tuple[str, str]
+str
+str
+str
+bytes
+str
+str
+str
+callable
+bool
+bool
+bool
+bool
+Namespace
+None

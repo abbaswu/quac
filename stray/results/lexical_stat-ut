@@ -1,0 +1,6 @@
+<class 'extyper.nodes.FuncDef'>:1
+<class 'extyper.nodes.Block'>:1
+<class 'extyper.nodes.ReturnStmt'>:1
+<class 'extyper.nodes.CallExpr'>:1
+<class 'extyper.nodes.NameExpr'>:1
+<class 'extyper.nodes.StrExpr'>:1

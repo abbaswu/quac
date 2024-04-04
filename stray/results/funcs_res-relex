@@ -1,0 +1,36 @@
+None
+builtins.str
+allennlp.data.instance.Instance
+builtins.str
+builtins.str
+builtins.list[builtins.str]
+builtins.str/numpy.ndarray[Any, Any]/torch._tensor.Tensor
+builtins.object
+builtins.object
+Tuple[builtins.int, builtins.int, builtins.int]
+builtins.list[allennlp.data.tokenizers.token_class.Token]
+Tuple[builtins.list[allennlp.data.tokenizers.token_class.Token], builtins.list[builtins.int], builtins.list[builtins.int]]
+builtins.list[allennlp.data.tokenizers.token_class.Token]
+builtins.list[builtins.int]
+builtins.int/numpy.ndarray[Any, Any]/torch._tensor.Tensor
+numpy.ndarray[Any, Any]/builtins.list[Tuple[builtins.int, builtins.str]]
+builtins.dict[Any, builtins.str]
+Any
+torch._tensor.Tensor
+torch._tensor.Tensor
+numpy.ndarray[Any, Any]
+torch._tensor.Tensor
+torch._tensor.Tensor
+builtins.dict[Any, builtins.str]
+builtins.bool
+None
+torch._tensor.Tensor
+torch._tensor.Tensor
+Tuple[builtins.int, builtins.int]/Tuple[numpy.ndarray[Any, Any], numpy.signedinteger[Any]]
+numpy.ndarray[Any, Any]/torch._tensor.Tensor/builtins.list[builtins.int]
+numpy.ndarray[Any, Any]/torch._tensor.Tensor
+builtins.int/numpy.ndarray[Any, Any]
+builtins.object/builtins.int/builtins.float
+None
+Tuple[allennlp.data.instance.Instance, builtins.dict[<nothing>, <nothing>]]
+builtins.dict[builtins.str, builtins.str]/numpy.ndarray[Any, Any]

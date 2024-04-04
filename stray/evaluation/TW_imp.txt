@@ -1,0 +1,83 @@
+nan/List[Token]
+str/Character
+Token/str
+nan/List[Token]
+str/Text
+
+nan/Axis
+Point2/Vector
+nan/Pauli
+Vector/tp.Any
+nan/Point2
+tp.Any/Units
+nan/List[str]
+Callable/Callable[..., Any]
+nan/Optional[int]
+Token/str
+int/torch.LongTensor
+nan/Optional[int]
+Token/str
+int/torch.LongTensor
+nan/Vertex
+Token/str
+torch.LongTensor/int/torch.Tensor
+nan/List[Dict[str, Any]]
+Token/str
+torch.LongTensor/int/torch.Tensor
+nan/Scalar
+Token/str
+torch.LongTensor/int/torch.Tensor
+nan/Dict[str, Any]
+Token/str
+torch.LongTensor/int/torch.Tensor
+nan/List[str]
+Token/str
+torch.LongTensor/int/torch.Tensor
+nan/List[Dict[str, Any]]
+Token/str
+torch.LongTensor/int/torch.Tensor
+nan/List[str]
+Token/str
+int/Optional[torch.Tensor]
+nan/Optional[str]
+Token/str
+torch.LongTensor/int/torch.Tensor
+nan/tp.Any
+object/tp.Any
+nan/bool_t
+object/tp.Any
+
+
+dict/Mapping[str, Any]
+
+
+dict/Mapping[str, Any]
+
+
+dict/BuildEnvironment
+
+
+dict/BuildEnvironment
+
+nan/List[int]
+dict/BuildEnvironment
+
+nan/List[str]
+dict/BuildEnvironment
+
+nan/List[Any]
+dict/BuildEnvironment
+
+nan/List[Any]
+dict/BuildEnvironment
+
+nan/List[str]
+dict/BuildEnvironment
+
+nan/Tuple[str, str]
+dict/BuildEnvironment
+
+nan/List[bool]
+dict/Mapping[str, Any]
+nan/List[str]
+str/Namespace

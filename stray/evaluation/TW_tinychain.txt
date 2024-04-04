@@ -1,0 +1,107 @@
+nan/List[str]
+nan/float
+nan/bytes
+
+int/str
+nan/bytes
+int/str
+nan/Tuple[int, int]
+nan/BlockNumber
+Dict/str
+nan/Optional[Block]
+Hash32/str
+str/ChainState
+nan/Optional[Node]
+Block/bool
+bool/Address
+nan/bytes
+Block/BlockSpecification
+Address/ChainState
+nan/bytes
+Dict/str
+str/Dict
+nan/MessageBuilder
+nan/Dict[str, Any]
+int/(int | None)
+
+nan/Iterator[str]
+
+bytes/int
+int/bytes
+int/bytes
+bool/Optional[bool]
+int/float
+
+bytes/str
+int/str
+nan/Optional[int]
+str/Dict
+str/List[int]
+nan/bytes
+Hash32/str
+nan/bytes
+bytes/str
+str/int
+nan/Dict[str, Any]
+Optional[Node]/nan
+Block/Dict[str, Any]
+
+nan/Dict[str, Any]
+Dict[str, Any]/Callable
+Address/int
+int/bool
+bool/Optional[bool]
+nan/bool
+Dict[str, Any]/int
+str/int
+Dict[str, Any]/TxReceipt
+nan/bytes
+int/Address
+int/List[int]
+int/str
+int/str
+nan/np.ndarray
+Block/bool
+nan/Optional[int]
+str/Dict[str, Any]
+nan/Iterator[str]
+Dict[str, Any]/str
+nan/List[str]
+str/int
+
+socket.socket/bool
+int/str
+nan/CheckResult
+socket.socket/bool
+int/str
+
+socket.socket/bool
+int/str
+
+socket.socket/bool
+int/str
+
+socket.socket/bool
+int/str
+
+socket.socket/bool
+int/str
+nan/Optional[Dict[str, Any]]
+Request/HttpRequest
+nan/Iterable[str]
+bytes/Dict[str, Any]
+List[Tuple[str, int]]/int
+nan/bytes/AnyStr
+int/str
+nan/bytes
+bytes/str
+
+bytes/nan
+bytes/str
+nan/bytes
+str/Path
+nan/Tuple[str, str]/bytes
+str/bytes
+nan/List[float]
+Iterable/List[T]
+int/Optional[int]

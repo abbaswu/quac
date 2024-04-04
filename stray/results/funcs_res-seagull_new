@@ -1,0 +1,67 @@
+numpy.ndarray[Any, numpy.dtype[numpy.floating[numpy.typing._64Bit]]]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+Tuple[builtins.list[builtins.int], builtins.list[builtins.int]]
+builtins.str
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+builtins.str
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, numpy.dtype[Any]]
+Any
+numpy.ndarray[Any, Any]
+builtins.str/builtins.list[Any]
+None
+seagull_new.Lifeform
+numpy.ndarray[Any, Any]/builtins.list[builtins.int]/builtins.bytes
+None
+Tuple[matplotlib.image.AxesImage, matplotlib.pyplot.Figure]
+Tuple[builtins.int, builtins.int]
+builtins.dict[builtins.str, numpy.ndarray[Any, Any]]
+Any
+builtins.int/numpy.ndarray[Any, Any]/builtins.bool
+builtins.dict[builtins.object, builtins.str]
+builtins.dict[builtins.str, numpy.ndarray[Any, Any]]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+builtins.object/builtins.int/builtins.float
+builtins.tuple[builtins.int]
+matplotlib.pyplot.Figure
+Tuple[builtins.int, builtins.int]
+None
+Any
+None
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+Any
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+numpy.ndarray[Any, Any]
+Any
+builtins.str
+seagull_new.Custom
+builtins.str
+builtins.str
+numpy.ndarray[Any, Any]/builtins.list[builtins.str]/builtins.set[builtins.str]
+builtins.str
+builtins.str
+seagull_new.Custom
+builtins.str

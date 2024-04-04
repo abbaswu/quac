@@ -1,0 +1,34 @@
+None
+builtins.str
+allennlp.data.instance.Instance
+builtins.str
+builtins.str
+builtins.list[builtins.str]
+Any
+builtins.dict[builtins.object, builtins.object]/builtins.object/builtins.str
+builtins.object/builtins.str
+Tuple[allennlp.data.fields.sequence_label_field.SequenceLabelField, allennlp.data.fields.sequence_label_field.SequenceLabelField, allennlp.data.fields.text_field.TextField]
+builtins.list[allennlp.data.tokenizers.token_class.Token]
+Tuple[builtins.list[allennlp.data.tokenizers.token_class.Token], builtins.list[builtins.int], builtins.list[builtins.int]]
+builtins.list[allennlp.data.tokenizers.token_class.Token]
+builtins.list[builtins.int]
+builtins.int/numpy.ndarray[Any, Any]/torch._tensor.Tensor
+numpy.ndarray[Any, Any]/builtins.list[Tuple[builtins.int, builtins.str]]
+builtins.dict[Any, builtins.str]
+Any
+torch._tensor.Tensor
+torch._tensor.Tensor
+numpy.ndarray[Any, Any]
+torch._tensor.Tensor
+torch._tensor.Tensor
+builtins.dict[Any, builtins.str]
+builtins.bool
+None
+torch._tensor.Tensor
+torch._tensor.Tensor
+Tuple[builtins.int, builtins.int]
+builtins.str/numpy.ndarray[Any, Any]/torch._tensor.Tensor
+Any
+builtins.int
+builtins.object/builtins.int/builtins.float
+None

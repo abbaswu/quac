@@ -1,0 +1,16 @@
+nan/Dict[str, Any]
+nan/bytes
+str/URL
+nan/bytes
+str/Text
+bytes/dict
+nan/(str | None)
+str/Optional[str]
+bool/Context
+bool/str
+bool/str
+bool/str
+bool/str
+bool/List[str]
+nan/argparse.Namespace
+

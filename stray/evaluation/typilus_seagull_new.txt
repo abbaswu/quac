@@ -1,0 +1,68 @@
+int/float/str
+tensorflow.tensor/str/e1
+Tuple[str, str, str]/Tuple[str, Dict[str, Any]]/Tuple[int, str]
+str
+tensorflow.Tensor/float/base.TensorType
+str/int/soco.SoCo
+TaaData/superset.connectors.sqla.models.SqlaTable/subprocess.CompletedProcess
+e1/e3/e4
+numpy.datetime64/str/raiden.transfer.architecture.TransitionResult
+Dict[str, Any]/str/rtype.State
+int/float/ComplexColors
+Dict[str, Any]/str/rtype.State
+NumberOrArray/str
+str
+str/bytes/DsaKey
+str/bytes
+str/google.protobuf.message.Message/List[unicode]
+str
+argparse.Namespace/Dict[str, Any]/alerta.models.alert.Alert
+str/Pattern[str]
+str/float/Dict[str, Any]
+Pattern[str]/str/bytes
+str/qiskit.providers.JobStatus/pyfsntfs.data_stream
+str
+list/numpy.ndarray/Tuple[Any, Any]
+int/Tuple[float, float]/types.Dimensions
+mypyc.ir.ops.Value/IO[bytes]/core.services.accounting.PrivilegeLevel
+str/List[str]/TrainingType
+Tuple[float, float]/List[str]
+Tuple[int, str]/str, str, str/numpy.ndarray, float
+numpy.ndarray/numpy.array/bool
+Union[str, VMGuestPatchRebootSetting]/cookiemonster.processor.models.Rule/str
+int/List[mypyc.ir.rtypes.RType]/List[List]
+List[str]/int/qiskit.dagcircuit.DAGCircuit
+List[float]/TestHistory/Callable[[mypy.types.CallableType, mypy.types.Type, str, mypy.nodes.Context], None]
+List[str]/Dict[Any, Dict[str, Any]]/list
+bool
+quodlibet.util.collection.Playlist/gi.repository.GdkPixbuf.Pixbuf/List[Dict]
+str/Dict[str, Any]/CursorObj
+int/str
+Tuple[float, float]/List[str]
+str, str, str/Tuple[int, str]/numpy.ndarray, float
+tensorflow.Tensor/int/numpy.ndarray
+tensorflow.Tensor/numpy.ndarray/float
+numpy.ndarray/tensorflow.Tensor/dcs.triggers.TriggerZone
+str
+str/PyQt5.QtWidgets.QHBoxLayout/sastool.io.credo_cpth5.Exposure
+str/PyQt5.QtWidgets.QHBoxLayout/sastool.io.credo_cpth5.Exposure
+str/PyQt5.QtWidgets.QHBoxLayout/sastool.io.credo_cpth5.Exposure
+str/PyQt5.QtWidgets.QHBoxLayout/sastool.io.credo_cpth5.Exposure
+str/Iterable[Dict[str, Any]]
+str/Iterable[Dict[str, Any]]
+str/PyQt5.QtWidgets.QHBoxLayout
+int
+str/PyQt5.QtWidgets.QHBoxLayout/sastool.io.credo_cpth5.Exposure
+str/int
+str/CursorObj
+str/Iterable[Dict[str, Any]]
+str/Iterable[Dict[str, Any]]
+str/int
+int/mimesis.Seed/Union[int, numpy.random.Generator]
+str/PyQt5.QtWidgets.QHBoxLayout/prop_value.PropValue
+Sequence[int]/str/float
+str/PyQt5.QtWidgets.QHBoxLayout/sastool.io.credo_cpth5.Exposure
+str/PyQt5.QtWidgets.QHBoxLayout/sastool.io.credo_cpth5.Exposure
+str/PyQt5.QtWidgets.QHBoxLayout/sastool.io.credo_cpth5.Exposure
+str/PyQt5.QtWidgets.QHBoxLayout/sastool.io.credo_cpth5.Exposure
+str/PyQt5.QtWidgets.QHBoxLayout/sastool.io.credo_cpth5.Exposure 

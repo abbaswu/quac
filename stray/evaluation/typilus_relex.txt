@@ -1,0 +1,36 @@
+typing.Any/typing.str/bool
+typing.str/typing.Any/int
+typing.str/typing.Any/typing.Dict[typing.str, typing.Any]
+typing.str/typing.Any/int
+typing.str/typing.Any/int
+typing.str/typing.Any/typing.List[typing.str]
+typing.Any/typing.str/typing.List[typing.str]
+bool/typing.Any/azure.core.pipeline.transport.HttpResponse
+typing.str/typing.Any/typing.List[typing.str]
+typing.Any/typing.str/typing.List[typing.str]
+typing.Any/typing.str/typing.List[typing.str]
+typing.Any/typing.str/typing.List[typing.str]
+typing.Any/typing.str/typing.List[typing.str]
+typing.str/typing.Any/typing.Optional[typing.str]
+int/float/typing.str
+typing.str/typing.Any/int
+typing.str/typing.Any/int
+typing.Any/typing.str/typing.List[typing.str]
+typing.str/typing.Any/int
+typing.str/typing.Any/int
+bool/typing.Any/int
+typing.Any/typing.List[typing.str]/bool
+typing.Any/typing.List[typing.str]/ClsType[None]
+typing.Any/typing.List[typing.str]/typing.str
+typing.Any/typing.Optional[typing.str]/typing.Optional[bool]
+typing.str/typing.Any/bool
+typing.Any/typing.Dict[typing.str, typing.Any]/typing.str
+typing.Any/bool/typing.List[typing.str]
+bool/typing.Any/int
+int/bool/typing.Any
+typing.str/int/typing.Any
+typing.Any/typing.str/typing.List[typing.str]
+typing.Any/typing.Optional[typing.str]/typing.Optional[bool]
+typing.Any/typing.str/typing.List[typing.str]
+typing.str/typing.Any/typing.Dict[typing.str, typing.Any]
+typing.Any/typing.str/typing.Dict[typing.str, typing.Any]

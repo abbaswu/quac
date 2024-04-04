@@ -1,0 +1,67 @@
+np.ndarray/nan
+Dict[str, torch.Tensor]/tf.Tensor
+nan/float
+int/np.ndarray
+nan/Set[str]
+str/Realm
+nan/List[Tuple[int, int]]
+np.ndarray/int
+int/str
+nan/float
+int/np.ndarray
+nan/np.ndarray/float
+State/np.ndarray
+nan/np.ndarray/np.array
+bytes/str/Union[str, bytes]
+
+int/str
+Location/int
+
+nan/Tuple[float, float]
+Tuple[int, int]/Tuple[int, ...]
+nan/Mapping[str, object]
+List[Tuple[int, int]]/str
+int/float
+
+nan/List[Dict[str, str]]
+str/List[Dict[str, Any]]
+nan/np.ndarray
+bool/List[str]
+nan/np.ndarray
+nan/List[str]
+Tuple[int, int]/Tuple[int, ...]
+
+np.ndarray/np.array
+
+torch.Tensor/np.ndarray
+nan/np.ndarray
+nan/np.ndarray/np.array
+nan/np.ndarray/np.array
+nan/np.ndarray/np.array
+nan/np.ndarray/np.array
+nan/tf.Tensor
+nan/tf.Tensor
+nan/np.ndarray
+nan/np.ndarray/np.array
+nan/tf.Tensor
+nan/tf.Tensor
+nan/tf.Tensor
+nan/tf.Tensor
+nan/tf.Tensor
+nan/np.ndarray
+nan/np.ndarray
+nan/np.ndarray/np.array
+nan/np.ndarray/np.array
+nan/np.ndarray/np.array
+nan/np.ndarray/np.array
+nan/np.ndarray/np.array
+nan/bytes
+str/Path
+nan/float
+str/List[str]
+nan/Optional[str]
+str/List[str]
+nan/List[str]
+str/Text
+nan/Dict[str, int]
+str/Text

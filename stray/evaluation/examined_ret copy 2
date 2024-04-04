@@ -1,0 +1,15 @@
+('pendulum', 243, ['<partial dict[, ]>'], ['Dict[int,str]']), Para
+('pendulum', 267, ['Time'], ['time']), poly
+('pendulum', 390, ['datetime'], ['DateTime']), poly
+('pendulum', 237, ['list[any]'], ['list[int]']), Para
+('pendulum', 240, ['list[Tuple[any, any, <nothing>]]'], ['list[Tuple[any,bool,int]]']), Para
+('pendulum', 564, ['Period'], ['str'])
+('pendulum', 372, ['None'], ['str'])
+('pendulum', 262, ['Time'], ['time']), poly
+('pendulum', 390, ['datetime'], ['DateTime']), poly
+('pendulum', 687, ['Duration'], ['datetime', 'date']), wrong annotation
+('pendulum', 699), wrong annotation
+('seagull', 10), poly
+('seagull', 12), poly
+('htmlark', 2), para
+('relex', 49, ['tuple[noting,dict]'], ['tuple[instance, dict]']), para
