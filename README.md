@@ -51,6 +51,19 @@ quac \
 -p <module prefix>
 ```
 
+For example, to run QuAC on Python modules starting with `shell_sort` in the directory `/tmp/module_search_path` and save output to `/tmp/quac_output`:
+
+```bash
+docker run \
+--rm \
+--net=host \
+-v /tmp/module_search_path:/mnt/mounted_module_search_path:ro \
+-v /tmp/quac_output:/mnt/output_path \
+quac \
+-m quac \
+-p shell_sort
+```
+
 ## Code Organization
 
 - `Dockerfile`: Self-explanatory.
