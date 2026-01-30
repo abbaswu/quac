@@ -257,9 +257,11 @@ class Client:
                                         return_value = parsed_name_info_ast_value
                                 else:
                                     assert False, f"Cannot handle TypeAlias with value {ast.unparse(name_info_ast_value)}"
-                            # Idiom 2: TypeshedClass
+                            # Idiom 2: TypeshedClass, Subscription, or Union
+                            # e.g., sys.unraisablehook: Callable[[UnraisableHookArgs], Any]
                             else:
-                                assert isinstance(parsed_name_info_ast_annotation, TypeshedClass)
+                                assert isinstance(parsed_name_info_ast_annotation, (TypeshedClass, Subscription, Union)), \
+                                    f"Expected TypeshedClass/Subscription/Union for {module_name}.{name}, got {type(parsed_name_info_ast_annotation).__name__}: {parsed_name_info_ast_annotation}"
                                 return_value = parsed_name_info_ast_annotation
                         else:
                             assert False, f"Cannot handle node {ast.unparse(name_info_ast)} in module {module_name}"
