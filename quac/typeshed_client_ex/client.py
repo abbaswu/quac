@@ -257,9 +257,11 @@ class Client:
                                         return_value = parsed_name_info_ast_value
                                 else:
                                     assert False, f"Cannot handle TypeAlias with value {ast.unparse(name_info_ast_value)}"
-                            # Idiom 2: TypeshedClass
+                            # Idiom 2: TypeshedClass, Subscription, or Union
+                            # e.g., sys.unraisablehook: Callable[[UnraisableHookArgs], Any]
                             else:
-                                assert isinstance(parsed_name_info_ast_annotation, TypeshedClass)
+                                assert isinstance(parsed_name_info_ast_annotation, (TypeshedClass, Subscription, Union)), \
+                                    f"Expected TypeshedClass/Subscription/Union for {module_name}.{name}, got {type(parsed_name_info_ast_annotation).__name__}: {parsed_name_info_ast_annotation}"
                                 return_value = parsed_name_info_ast_annotation
                         else:
                             assert False, f"Cannot handle node {ast.unparse(name_info_ast)} in module {module_name}"
@@ -648,7 +650,12 @@ class Client:
                             self.look_up_name(class_.module_name, child_node_ast_value_id)
                 else:
                     # Parse assigned ast.expr in global scope
-                    lookup_result = self.parse_ast_expr_to_lookup_result(class_.module_name, child_node_ast.value)
+                    try:
+                        lookup_result = self.parse_ast_expr_to_lookup_result(class_.module_name, child_node_ast.value)
+                    except Exception as e:
+                        logging.error("Cannot resolve value %s in class %s: %s. Treating as typing.Any", ast.unparse(child_node_ast.value), class_, e)
+                        class_variable_name_to_type_annotation_dict[child_node_name] = TypeshedClass('typing', 'Any')
+                        continue
                     if isinstance(lookup_result, TypeshedTypeAnnotation):
                         type_annotation = simplify_type_annotation(lookup_result)
                         class_variable_name_to_type_annotation_dict[child_node_name] = type_annotation
