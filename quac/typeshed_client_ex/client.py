@@ -650,7 +650,12 @@ class Client:
                             self.look_up_name(class_.module_name, child_node_ast_value_id)
                 else:
                     # Parse assigned ast.expr in global scope
-                    lookup_result = self.parse_ast_expr_to_lookup_result(class_.module_name, child_node_ast.value)
+                    try:
+                        lookup_result = self.parse_ast_expr_to_lookup_result(class_.module_name, child_node_ast.value)
+                    except Exception as e:
+                        logging.error("Cannot resolve value %s in class %s: %s. Treating as typing.Any", ast.unparse(child_node_ast.value), class_, e)
+                        class_variable_name_to_type_annotation_dict[child_node_name] = TypeshedClass('typing', 'Any')
+                        continue
                     if isinstance(lookup_result, TypeshedTypeAnnotation):
                         type_annotation = simplify_type_annotation(lookup_result)
                         class_variable_name_to_type_annotation_dict[child_node_name] = type_annotation
